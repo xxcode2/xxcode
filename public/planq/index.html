@@ -448,7 +448,7 @@ sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"000000000000000000
                 </div>
                 <p class="text-zinc-400 mb-4 pl-11">Create a systemd service file for automatic startup.</p>
                 <div class="code-block p-4 pl-11 mb-2">
-                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null <<EOF
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null
 [Unit]
 Description=Planq Node
 After=network.target
