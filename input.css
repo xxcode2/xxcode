@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply font-roboto bg-gradient-to-br from-custom-blue-900 to-custom-blue-800 min-h-screen text-blue-100;
+  }
+}
+
 @layer components {
   .gradient-card {
     @apply bg-gradient-to-br from-custom-blue-800/40 to-custom-blue-900/70 backdrop-blur-md border border-custom-blue-500/30;
@@ -61,7 +67,7 @@
   }
 
   .social-icon:hover {
-    @apply -translate-y-1 brightness-120;
+    @apply -translate-y-1 brightness-110;
   }
 }
 
