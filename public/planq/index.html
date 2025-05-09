@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planq Node Installation Guide - XXCode</title>
+    <title>Planq Node Installation Guide</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -149,11 +149,18 @@
         .animate-fadeIn {
             animation: fadeIn 0.3s ease forwards;
         }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="bg-black border-b border-zinc-800">
+    <nav class="navbar fixed w-full z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center mb-4 md:mb-0">
                 <a href="/" class="flex items-center">
@@ -187,7 +194,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto px-4 py-8 mt-24">
         <!-- Breadcrumb -->
         <div class="flex items-center text-sm mb-8 text-zinc-400">
             <a href="/" class="hover:text-green-400">Home</a>
@@ -448,7 +455,7 @@ sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"000000000000000000
                 </div>
                 <p class="text-zinc-400 mb-4 pl-11">Create a systemd service file for automatic startup.</p>
                 <div class="code-block p-4 pl-11 mb-2">
-                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null <<EOF
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null
 [Unit]
 Description=Planq Node
 After=network.target
