@@ -448,7 +448,7 @@ sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"000000000000000000
                 </div>
                 <p class="text-zinc-400 mb-4 pl-11">Create a systemd service file for automatic startup.</p>
                 <div class="code-block p-4 pl-11 mb-2">
-                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null <<EOF
 [Unit]
 Description=Planq Node
 After=network.target
@@ -643,6 +643,92 @@ planqd query bank balances $(planqd keys show wallet -a)</code></pre>
                             <li>Ensure your node's ports are open</li>
                             <li>Try using different persistent peers</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What are the minimum system requirements?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        The minimum requirements are 4GB RAM, 100GB storage, and a stable internet connection. For optimal performance, we recommend 8GB RAM and 200GB storage.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How long does it take to sync the node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        Initial sync time depends on your internet connection and hardware. Typically, it takes 24-48 hours to fully sync with the network.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How do I update my node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        To update your node, stop the current process, pull the latest changes from the repository, rebuild, and restart the node.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What ports need to be open?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        The default ports that need to be open are 26656 (P2P) and 26657 (RPC). Make sure these ports are accessible if you're running a validator.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How do I check if my node is synced?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        You can check your node's sync status using the command: <code class="text-green-400">planqd status 2>&1 | jq .SyncInfo</code>. The node is fully synced when "catching_up" is false.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What is state sync and should I use it?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        State sync allows you to quickly sync your node by downloading a recent snapshot instead of replaying all transactions. It's recommended for faster initial sync, but you should verify the state sync providers are trustworthy.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How do I backup my node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        The most important files to backup are in the ~/.planqd/config directory, especially your priv_validator_key.json. You can use rsync or tar to create regular backups of these files.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What is pruning and how does it work?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        Pruning is a process that removes old transaction data to save disk space. The "custom" pruning strategy keeps the last 100 blocks by default, but you can adjust these settings based on your needs.
                     </div>
                 </div>
             </div>
