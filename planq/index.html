@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planq Node Installation Guide - XXCode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f0f0f;
+            color: #e2e8f0;
+        }
+        
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .xxcode-logo {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background-color: #1a1a1a;
+            border-radius: 0.5rem;
+            position: relative;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .code-block pre {
+            overflow-x: auto;
+            padding: 0.5rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            transition: all 0.2s;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .copy-button:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copy-notification {
+            position: absolute;
+            top: 0.75rem;
+            right: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #4ade80, #facc15);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4ade80, #facc15);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+
+        .xxcode-gradient {
+            background: linear-gradient(135deg, #4ade80, #facc15);
+        }
+
+        .xxcode-text-gradient {
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .xxcode-border-gradient {
+            border: 1px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, #4ade80, #facc15);
+        }
+
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(250, 204, 21, 0.1));
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s;
+        }
+
+        .gradient-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.2);
+        }
+
+        #mobileMenu {
+            background-color: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-black"></div>
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute h-32 w-32 rounded-full bg-blue-500 blur-3xl top-1/4 left-1/4 animate-pulse"></div>
+            <div class="absolute h-48 w-48 rounded-full bg-blue-700 blur-3xl bottom-1/3 right-1/3 animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute h-24 w-24 rounded-full bg-blue-400 blur-3xl top-1/2 right-1/4 animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-black border-b border-zinc-800">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <a href="/" class="flex items-center">
+                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                        <img src="/images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="/" class="nav-link text-gray-300 hover:text-white">Home</a>
+                <a href="/#services" class="nav-link active-nav text-white font-medium">Services</a>
+                <a href="/#about" class="nav-link text-gray-300 hover:text-white">About</a>
+                <a href="/#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="/" class="block text-gray-300 hover:text-white">Home</a>
+                <a href="/#services" class="block text-white font-medium">Services</a>
+                <a href="/#about" class="block text-gray-300 hover:text-white">About</a>
+                <a href="/#contact" class="block text-gray-300 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="relative z-10 container mx-auto px-4 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center text-sm mb-8 text-zinc-400">
+            <a href="/" class="hover:text-green-400">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/#services" class="hover:text-green-400">Services</a>
+            <span class="mx-2">/</span>
+            <span class="text-zinc-300">Planq Node Installation</span>
+        </div>
+
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 xxcode-text-gradient">Planq Node Installation Guide</h1>
+            <p class="text-zinc-400 max-w-3xl">A comprehensive guide to installing and configuring a Planq blockchain node on your server. Follow these steps to set up your node quickly and efficiently.</p>
+        </div>
+
+        <!-- Service Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-server text-green-500"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">System Requirements</h3>
+                </div>
+                <ul class="text-zinc-400 space-y-3">
+                    <li class="flex items-start">
+                        <i class="fas fa-microchip mt-1 mr-3 text-green-500/70"></i>
+                        <span>4 CPU cores</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-memory mt-1 mr-3 text-green-500/70"></i>
+                        <span>8GB RAM</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-hdd mt-1 mr-3 text-green-500/70"></i>
+                        <span>200GB SSD storage</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-network-wired mt-1 mr-3 text-green-500/70"></i>
+                        <span>Stable internet connection</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-yellow-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-clock text-yellow-500"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">Estimated Time</h3>
+                </div>
+                <ul class="text-zinc-400 space-y-3">
+                    <li class="flex items-start">
+                        <i class="fas fa-tools mt-1 mr-3 text-yellow-500/70"></i>
+                        <span>Setup: 15-20 minutes</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-sync mt-1 mr-3 text-yellow-500/70"></i>
+                        <span>Sync: 2-3 hours</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle mt-1 mr-3 text-yellow-500/70"></i>
+                        <span>Validation: 10 minutes</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-link text-blue-500"></i>
+                    </div>
+                    <h3 class="font-semibold text-lg">Useful Links</h3>
+                </div>
+                <ul class="text-zinc-400 space-y-3">
+                    <li class="flex items-start">
+                        <i class="fas fa-book mt-1 mr-3 text-blue-500/70"></i>
+                        <a href="https://docs.planq.network/" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline">Official Documentation</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fab fa-github mt-1 mr-3 text-blue-500/70"></i>
+                        <a href="https://github.com/planq-network/planq" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline">GitHub Repository</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fab fa-discord mt-1 mr-3 text-blue-500/70"></i>
+                        <a href="https://discord.gg/planq-network" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline">Discord Community</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-chart-line mt-1 mr-3 text-blue-500/70"></i>
+                        <a href="https://explorer.planq.network/" target="_blank" class="text-blue-400 hover:text-blue-300 hover:underline">Network Explorer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Installation Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 flex items-center">
+                <span class="xxcode-text-gradient">Installation Steps</span>
+                <div class="h-px flex-grow bg-gradient-to-r from-green-500/20 to-transparent ml-4"></div>
+            </h2>
+            
+            <!-- Step 1 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-4">1</div>
+                    <h3 class="text-xl font-semibold">Update System Packages</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-[3.25rem]">First, make sure your system is up to date with the latest packages.</p>
+                <div class="gradient-card rounded-xl overflow-hidden">
+                    <div class="code-block p-4 pl-[3.25rem] mb-0 bg-black/50">
+                        <pre class="text-zinc-300"><code>sudo apt update && sudo apt upgrade -y</code></pre>
+                        <button class="copy-button bg-black/30 hover:bg-black/50 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification">Copied!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-4">2</div>
+                    <h3 class="text-xl font-semibold">Install Dependencies</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-[3.25rem]">Install the necessary dependencies for the Planq node software.</p>
+                <div class="gradient-card rounded-xl overflow-hidden">
+                    <div class="code-block p-4 pl-[3.25rem] mb-0 bg-black/50">
+                        <pre class="text-zinc-300"><code>sudo apt install curl build-essential git wget jq make gcc tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip lz4 -y</code></pre>
+                        <button class="copy-button bg-black/30 hover:bg-black/50 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification">Copied!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">3</div>
+                    <h3 class="text-xl font-semibold">Install Go</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Install Go programming language which is required for the Planq node software.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>cd $HOME
+ver="1.19.5"
+wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf "go$ver.linux-amd64.tar.gz"
+rm "go$ver.linux-amd64.tar.gz"</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">4</div>
+                    <h3 class="text-xl font-semibold">Setup Environment Variables</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Configure your environment variables for Go and the Planq node software.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> $HOME/.bash_profile
+echo "export PLANQ_CHAIN_ID=planq_7070-2" >> $HOME/.bash_profile
+echo "export PLANQ_MONIKER=your-node-name" >> $HOME/.bash_profile
+source $HOME/.bash_profile</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+                <p class="text-zinc-400 mt-4 pl-11">Make sure to replace <code class="bg-zinc-800 px-1 rounded">your-node-name</code> with your desired node name.</p>
+            </div>
+            
+            <!-- Step 5 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">5</div>
+                    <h3 class="text-xl font-semibold">Clone and Build the Planq Node Software</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Download and compile the Planq node software from the source.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>cd $HOME
+git clone https://github.com/planq-network/planq.git
+cd planq
+git checkout v1.0.7
+make install</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 6 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">6</div>
+                    <h3 class="text-xl font-semibold">Initialize the Node</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Initialize your Planq node with the chain ID.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>planqd init $PLANQ_MONIKER --chain-id $PLANQ_CHAIN_ID</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 7 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">7</div>
+                    <h3 class="text-xl font-semibold">Download Genesis File</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Download the genesis file for the Planq network.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>wget -O $HOME/.planqd/config/genesis.json "https://raw.githubusercontent.com/planq-network/networks/main/mainnet/genesis.json"</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 8 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">8</div>
+                    <h3 class="text-xl font-semibold">Configure Peers</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Add seed nodes and persistent peers to your configuration.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>SEEDS="dd2f0ceaa0b21491ecae17413b242d69916550ae@135.125.247.70:26656,0525de7e7640008d2a2e01d1a7f6456f28f3324c@51.79.142.6:26656,21432722b67540f6b366806dff295849738d7865@139.99.223.241:26656"
+PEERS="0b42fd287d3bb0a20230e30d54b4b8facc412c53@176.9.149.15:26656,2f394edda96be07bf92b0b503d8be13d1b9cc39e@5.9.40.222:26656,8c2d799bcc4fbf44ef34bbd2631db5c3f4619e41@213.239.217.52:26656,9e38cf7ccb898632482a09b26ecba3f7e1a9e300@51.75.135.46:26656,641eebecbbe6166f00d4b4307a89081ee62c2b9f@51.75.135.47:26656,8a8bbec0c685fdec2a2f67d0f9925faf8480371a@51.75.135.36:26656,94b63fddde17ff3e75c140e8de4d7f2d5a532c4a@51.75.135.38:26656,1d9cc23eedb2d812d30d99ed12d5c5f21ff40c23@51.75.135.34:26656,8d59d6c3fa0f61b9f868f56958ca2ce6692abf48@51.75.135.45:26656,6a08fdb9c87d78983e8218d0464c6ef2dec6bac0@51.75.135.44:26656,9527823dd0d321d0cd8261385ce0dc882cee5615@51.75.135.43:26656,7c95b2eec599369bebb8281b960589dc2857548a@51.75.135.42:26656,9d4286b0c5e98ed3afc883e2c8d97e89489f736e@51.75.135.41:26656,6663c8d09ac7571a4326d20bd0c8e2f831f64881@51.75.135.40:26656,2e877dac234099023a9237eb2e5a05cfb3893633@51.75.135.39:26656,8c1794a350b9aec72d1f1c76e7c3babe3a238f5c@51.75.135.37:26656,4d0927d1f3bd853666afd6422cd5aea9b70f4d59@51.75.135.35:26656,7023183a3ec3a8a406c048b2c1ffcb57c3452534@51.75.135.33:26656"
+sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.planqd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 9 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">9</div>
+                    <h3 class="text-xl font-semibold">Configure Pruning</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Configure pruning settings to optimize disk space usage.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="50"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.planqd/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.planqd/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.planqd/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.planqd/config/app.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 10 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">10</div>
+                    <h3 class="text-xl font-semibold">Create Service File</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Create a systemd service file to manage your Planq node.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null << EOF
+[Unit]
+Description=Planq Node
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=$(which planqd) start
+Restart=always
+RestartSec=3
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 11 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">11</div>
+                    <h3 class="text-xl font-semibold">Start the Node</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Enable and start your Planq node service.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo systemctl daemon-reload
+sudo systemctl enable planqd
+sudo systemctl start planqd</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Useful Commands -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Useful Commands</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Command 1 -->
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="font-semibold mb-3">Check Node Status</h4>
+                    <div class="code-block p-4 mb-2">
+                        <pre class="text-zinc-300 overflow-x-auto"><code>planqd status 2>&1 | jq</code></pre>
+                        <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification text-green-400">Copied!</span>
+                    </div>
+                </div>
+                
+                <!-- Command 2 -->
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="font-semibold mb-3">Check Logs</h4>
+                    <div class="code-block p-4 mb-2">
+                        <pre class="text-zinc-300 overflow-x-auto"><code>sudo journalctl -u planqd -f -o cat</code></pre>
+                        <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification text-green-400">Copied!</span>
+                    </div>
+                </div>
+                
+                <!-- Command 3 -->
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="font-semibold mb-3">Check Sync Status</h4>
+                    <div class="code-block p-4 mb-2">
+                        <pre class="text-zinc-300 overflow-x-auto"><code>planqd status 2>&1 | jq .SyncInfo</code></pre>
+                        <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification text-green-400">Copied!</span>
+                    </div>
+                </div>
+                
+                <!-- Command 4 -->
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="font-semibold mb-3">Create Wallet</h4>
+                    <div class="code-block p-4 mb-2">
+                        <pre class="text-zinc-300 overflow-x-auto"><code>planqd keys add wallet</code></pre>
+                        <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification text-green-400">Copied!</span>
+                    </div>
+                </div>
+                
+                <!-- Command 5 -->
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="font-semibold mb-3">Check Balance</h4>
+                    <div class="code-block p-4 mb-2">
+                        <pre class="text-zinc-300 overflow-x-auto"><code>planqd query bank balances $(planqd keys show wallet -a)</code></pre>
+                        <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification text-green-400">Copied!</span>
+                    </div>
+                </div>
+                
+                <!-- Command 6 -->
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <h4 class="font-semibold mb-3">Restart Node</h4>
+                    <div class="code-block p-4 mb-2">
+                        <pre class="text-zinc-300 overflow-x-auto"><code>sudo systemctl restart planqd</code></pre>
+                        <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                            <i class="far fa-copy text-zinc-300"></i>
+                        </button>
+                        <span class="copy-notification text-green-400">Copied!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <h4 class="font-semibold">How long does it take for the Planq node to sync?</h4>
+                        <i class="fas fa-chevron-down text-zinc-400 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4 text-zinc-400">
+                        <p>The initial sync time depends on network conditions and your hardware. Typically, it takes 2-3 hours for a full sync with the recommended hardware specifications. You can check the sync status using the command provided in the Useful Commands section.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <h4 class="font-semibold">What if I encounter errors during installation?</h4>
+                        <i class="fas fa-chevron-down text-zinc-400 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4 text-zinc-400">
+                        <p>Common issues can be resolved by:</p>
+                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                            <li>Ensuring your system meets the minimum requirements</li>
+                            <li>Checking logs for specific error messages using <code class="bg-zinc-800 px-1 rounded">sudo journalctl -u planqd -f -o cat</code></li>
+                            <li>Verifying network connectivity to peers</li>
+                            <li>Joining the Planq Discord community for support</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <h4 class="font-semibold">How do I update my Planq node software?</h4>
+                        <i class="fas fa-chevron-down text-zinc-400 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4 text-zinc-400">
+                        <p>To update your Planq node to a newer version:</p>
+                        <ol class="list-decimal pl-5 mt-2 space-y-1">
+                            <li>Stop the node service: <code class="bg-zinc-800 px-1 rounded">sudo systemctl stop planqd</code></li>
+                            <li>Go to the repository directory: <code class="bg-zinc-800 px-1 rounded">cd $HOME/planq</code></li>
+                            <li>Fetch the latest changes: <code class="bg-zinc-800 px-1 rounded">git fetch</code></li>
+                            <li>Checkout the new version: <code class="bg-zinc-800 px-1 rounded">git checkout [new-version]</code></li>
+                            <li>Rebuild: <code class="bg-zinc-800 px-1 rounded">make install</code></li>
+                            <li>Restart the service: <code class="bg-zinc-800 px-1 rounded">sudo systemctl start planqd</code></li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <h4 class="font-semibold">How can I become a validator on Planq?</h4>
+                        <i class="fas fa-chevron-down text-zinc-400 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden mt-4 text-zinc-400">
+                        <p>To become a validator on the Planq network:</p>
+                        <ol class="list-decimal pl-5 mt-2 space-y-1">
+                            <li>Ensure your node is fully synced</li>
+                            <li>Create a wallet and obtain PLANQ tokens</li>
+                            <li>Create your validator with the following command:</li>
+                        </ol>
+                        <div class="code-block p-4 my-2">
+                            <pre class="text-zinc-300 overflow-x-auto"><code>planqd tx staking create-validator \
+--amount=1000000000000aplanq \
+--pubkey=$(planqd tendermint show-validator) \
+--moniker="YOUR_VALIDATOR_NAME" \
+--identity=YOUR_KEYBASE_ID \
+--website="YOUR_WEBSITE" \
+--details="YOUR_DESCRIPTION" \
+--chain-id=planq_7070-2 \
+--commission-rate=0.10 \
+--commission-max-rate=0.20 \
+--commission-max-change-rate=0.01 \
+--min-self-delegation=1 \
+--from=wallet \
+--gas-prices=30000000000aplanq \
+--gas=auto \
+--gas-adjustment=1.5</code></pre>
+                        </div>
+                        <p>Replace the placeholder values with your own information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="bg-gradient-to-r from-red-900/30 to-amber-900/30 p-8 rounded-xl border border-orange-800/30 mb-12">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">Need Help with Installation?</h3>
+                    <p class="text-zinc-300">Our team at XXCODE is ready to assist you with any issues you might encounter during the Planq node setup process.</p>
+                </div>
+                <a href="https://t.me/xxcode_id" target="_blank" class="bg-gradient-to-r from-red-500 to-amber-500 hover:from-red-600 hover:to-amber-600 text-white font-medium py-3 px-6 rounded-lg transition-all transform hover:scale-105">
+                    Contact Support
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-zinc-800 py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <a href="https://www.xxcode.web.id/" class="flex items-center">
+                        <span class="text-xl font-bold text-white">XX<span class="xxcode-text-gradient">CODE</span></span>
+                    </a>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/xxcode-id" target="_blank" class="text-zinc-400 hover:text-white transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://twitter.com/xxcode_id" target="_blank" class="text-zinc-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://t.me/xxcode_id" target="_blank" class="text-zinc-400 hover:text-white transition-colors">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="https://discord.gg/xxcode" target="_blank" class="text-zinc-400 hover:text-white transition-colors">
+                        <i class="fab fa-discord"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-6 text-center text-zinc-500 text-sm">
+                &copy; 2023 XXCODE. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.previousElementSibling;
+            const code = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const notification = button.nextElementSibling;
+                notification.style.opacity = '1';
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                }, 2000);
+            });
+        }
+        
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0)';
+            }
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('animate-fadeIn');
+            } else {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('animate-fadeIn');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuButton = document.querySelector('.md\\:hidden button');
+            
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('animate-fadeIn');
+            }
+        });
+    </script>
+</body>
+</html>
