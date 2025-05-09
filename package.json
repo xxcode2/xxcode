@@ -5,7 +5,7 @@
   "main": "script.js",
   "scripts": {
     "dev": "tailwindcss -i ./input.css -o ./public/styles.css --watch",
-    "build": "tailwindcss -i ./input.css -o ./public/styles.css --minify && cp index.html public/ && cp script.js public/",
+    "build": "tailwindcss -i ./input.css -o ./public/styles.css --minify && mkdir -p public && cp -r index.html script.js public/images public/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
