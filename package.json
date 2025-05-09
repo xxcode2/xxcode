@@ -1,18 +1,19 @@
 {
   "name": "xxcode",
   "version": "1.0.0",
-  "description": "",
+  "description": "xxcode Portfolio Website",
   "main": "script.js",
   "scripts": {
-    "build": "tailwindcss -i ./input.css -o ./styles.css --watch",
+    "dev": "tailwindcss -i ./input.css -o ./styles.css --watch",
+    "build": "tailwindcss -i ./input.css -o ./styles.css --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1"
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.0"
   }
 }
