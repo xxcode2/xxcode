@@ -186,181 +186,249 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="relative min-h-screen">
-        <!-- Animated Background -->
-        <div class="fixed inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-black"></div>
-            <div class="absolute -top-1/2 -left-1/2 w-full h-full bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div class="absolute -bottom-1/2 -right-1/2 w-full h-full bg-yellow-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Breadcrumb -->
+        <div class="flex items-center text-sm mb-8 text-zinc-400">
+            <a href="/" class="hover:text-green-400">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/#services" class="hover:text-green-400">Services</a>
+            <span class="mx-2">/</span>
+            <span class="text-zinc-300">Planq Node Installation</span>
         </div>
 
-        <!-- Main Content -->
-        <div class="relative container mx-auto px-4 py-16">
-            <div class="max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center xxcode-text-gradient">Planq Node Installation Guide</h1>
-                
-                <!-- Introduction -->
-                <div class="gradient-card p-6 rounded-xl mb-8">
-                    <h2 class="text-2xl font-bold mb-4 xxcode-text-gradient">Introduction</h2>
-                    <p class="text-gray-300 mb-4">Planq is a high-performance blockchain platform that enables developers to build and deploy decentralized applications. This guide will help you set up a Planq node on your system.</p>
-                </div>
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 xxcode-text-gradient">Planq Node Installation Guide</h1>
+            <p class="text-zinc-400 max-w-3xl">A comprehensive guide to installing and configuring a Planq blockchain node on your server. Follow these steps to set up your node quickly and efficiently.</p>
+        </div>
 
-                <!-- Prerequisites -->
-                <div class="gradient-card p-6 rounded-xl mb-8">
-                    <h2 class="text-2xl font-bold mb-4 xxcode-text-gradient">Prerequisites</h2>
-                    <ul class="list-disc list-inside text-gray-300 space-y-2">
-                        <li>Ubuntu 20.04 or later</li>
-                        <li>Minimum 4GB RAM</li>
-                        <li>100GB free disk space</li>
-                        <li>Stable internet connection</li>
-                    </ul>
-                </div>
-
-                <!-- Installation Steps -->
-                <div class="gradient-card p-6 rounded-xl mb-8">
-                    <h2 class="text-2xl font-bold mb-4 xxcode-text-gradient">Installation Steps</h2>
-                    
-                    <!-- Step 1 -->
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4">
-                            <div class="step-number mr-4">1</div>
-                            <h3 class="text-xl font-semibold">Update System</h3>
-                        </div>
-                        <div class="code-block">
-                            <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
-                            <button class="copy-button" onclick="copyCode(this)">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                            <div class="copy-notification">Copied!</div>
-                        </div>
+        <!-- Service Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-server text-green-500"></i>
                     </div>
-
-                    <!-- Step 2 -->
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4">
-                            <div class="step-number mr-4">2</div>
-                            <h3 class="text-xl font-semibold">Install Dependencies</h3>
-                        </div>
-                        <div class="code-block">
-                            <pre><code>sudo apt install -y build-essential git curl wget</code></pre>
-                            <button class="copy-button" onclick="copyCode(this)">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                            <div class="copy-notification">Copied!</div>
-                        </div>
+                    <h3 class="font-semibold">System Requirements</h3>
+                </div>
+                <ul class="text-zinc-400 space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-microchip mt-1 mr-2 text-zinc-500"></i>
+                        <span>4 CPU cores</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-memory mt-1 mr-2 text-zinc-500"></i>
+                        <span>8GB RAM</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-hdd mt-1 mr-2 text-zinc-500"></i>
+                        <span>200GB SSD storage</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-network-wired mt-1 mr-2 text-zinc-500"></i>
+                        <span>Stable internet connection</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-clock text-yellow-500"></i>
                     </div>
+                    <h3 class="font-semibold">Estimated Time</h3>
+                </div>
+                <ul class="text-zinc-400 space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-tools mt-1 mr-2 text-zinc-500"></i>
+                        <span>Setup: 15-20 minutes</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-sync mt-1 mr-2 text-zinc-500"></i>
+                        <span>Sync: 2-3 hours</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle mt-1 mr-2 text-zinc-500"></i>
+                        <span>Validation: 10 minutes</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-link text-green-500"></i>
+                    </div>
+                    <h3 class="font-semibold">Useful Links</h3>
+                </div>
+                <ul class="text-zinc-400 space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-book mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://docs.planq.network/" target="_blank" class="text-green-400 hover:underline">Official Documentation</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fab fa-github mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://github.com/planq-network/planq" target="_blank" class="text-green-400 hover:underline">GitHub Repository</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fab fa-discord mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://discord.gg/planq-network" target="_blank" class="text-green-400 hover:underline">Discord Community</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-chart-line mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://explorer.planq.network/" target="_blank" class="text-green-400 hover:underline">Network Explorer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-                    <!-- Step 3 -->
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4">
-                            <div class="step-number mr-4">3</div>
-                            <h3 class="text-xl font-semibold">Install Go</h3>
-                        </div>
-                        <div class="code-block">
-                            <pre><code>wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz
+        <!-- Installation Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Installation Steps</h2>
+            
+            <!-- Step 1 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">1</div>
+                    <h3 class="text-xl font-semibold">Update System Packages</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">First, make sure your system is up to date with the latest packages.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo apt update && sudo apt upgrade -y</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">2</div>
+                    <h3 class="text-xl font-semibold">Install Dependencies</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Install the necessary dependencies for the Planq node software.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo apt install curl build-essential git wget jq make gcc tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip lz4 -y</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">3</div>
+                    <h3 class="text-xl font-semibold">Install Go</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Install Go programming language which is required for building the Planq node.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf go1.20.5.linux-amd64.tar.gz
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 source ~/.bashrc</code></pre>
-                            <button class="copy-button" onclick="copyCode(this)">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                            <div class="copy-notification">Copied!</div>
-                        </div>
-                    </div>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
 
-                    <!-- Step 4 -->
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4">
-                            <div class="step-number mr-4">4</div>
-                            <h3 class="text-xl font-semibold">Clone Planq Repository</h3>
-                        </div>
-                        <div class="code-block">
-                            <pre><code>git clone https://github.com/planq-network/planq.git
+            <!-- Step 4 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">4</div>
+                    <h3 class="text-xl font-semibold">Clone Planq Repository</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Clone the official Planq repository to your local machine.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>git clone https://github.com/planq-network/planq.git
 cd planq</code></pre>
-                            <button class="copy-button" onclick="copyCode(this)">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                            <div class="copy-notification">Copied!</div>
-                        </div>
-                    </div>
-
-                    <!-- Step 5 -->
-                    <div class="mb-6">
-                        <div class="flex items-center mb-4">
-                            <div class="step-number mr-4">5</div>
-                            <h3 class="text-xl font-semibold">Build Planq</h3>
-                        </div>
-                        <div class="code-block">
-                            <pre><code>make install</code></pre>
-                            <button class="copy-button" onclick="copyCode(this)">
-                                <i class="fas fa-copy"></i>
-                            </button>
-                            <div class="copy-notification">Copied!</div>
-                        </div>
-                    </div>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
                 </div>
+            </div>
 
-                <!-- Configuration -->
-                <div class="gradient-card p-6 rounded-xl mb-8">
-                    <h2 class="text-2xl font-bold mb-4 xxcode-text-gradient">Configuration</h2>
-                    <div class="code-block">
-                        <pre><code>planqd init mynode --chain-id planq_7000-1
+            <!-- Step 5 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">5</div>
+                    <h3 class="text-xl font-semibold">Build Planq</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Build the Planq node software from source.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>make install</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configuration -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Configuration</h2>
+            <div class="code-block p-4 mb-2">
+                <pre class="text-zinc-300 overflow-x-auto"><code>planqd init mynode --chain-id planq_7000-1
 planqd config chain-id planq_7000-1</code></pre>
-                        <button class="copy-button" onclick="copyCode(this)">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <div class="copy-notification">Copied!</div>
-                    </div>
-                </div>
+                <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                    <i class="far fa-copy text-zinc-300"></i>
+                </button>
+                <span class="copy-notification text-green-400">Copied!</span>
+            </div>
+        </div>
 
-                <!-- Start Node -->
-                <div class="gradient-card p-6 rounded-xl mb-8">
-                    <h2 class="text-2xl font-bold mb-4 xxcode-text-gradient">Start Node</h2>
-                    <div class="code-block">
-                        <pre><code>planqd start</code></pre>
-                        <button class="copy-button" onclick="copyCode(this)">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <div class="copy-notification">Copied!</div>
-                    </div>
-                </div>
+        <!-- Start Node -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Start Node</h2>
+            <div class="code-block p-4 mb-2">
+                <pre class="text-zinc-300 overflow-x-auto"><code>planqd start</code></pre>
+                <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                    <i class="far fa-copy text-zinc-300"></i>
+                </button>
+                <span class="copy-notification text-green-400">Copied!</span>
+            </div>
+        </div>
 
-                <!-- FAQ Section -->
+        <!-- FAQ Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Frequently Asked Questions</h2>
+            <div class="space-y-4">
                 <div class="gradient-card p-6 rounded-xl">
-                    <h2 class="text-2xl font-bold mb-4 xxcode-text-gradient">Frequently Asked Questions</h2>
-                    
-                    <div class="space-y-4">
-                        <div class="border-b border-gray-700 pb-4">
-                            <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
-                                <span class="font-medium">What are the minimum system requirements?</span>
-                                <i class="fas fa-chevron-down transform transition-transform"></i>
-                            </button>
-                            <div class="mt-2 text-gray-300 hidden">
-                                The minimum requirements are 4GB RAM, 100GB storage, and a stable internet connection. For optimal performance, we recommend 8GB RAM and 200GB storage.
-                            </div>
-                        </div>
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What are the minimum system requirements?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        The minimum requirements are 4GB RAM, 100GB storage, and a stable internet connection. For optimal performance, we recommend 8GB RAM and 200GB storage.
+                    </div>
+                </div>
 
-                        <div class="border-b border-gray-700 pb-4">
-                            <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
-                                <span class="font-medium">How long does it take to sync the node?</span>
-                                <i class="fas fa-chevron-down transform transition-transform"></i>
-                            </button>
-                            <div class="mt-2 text-gray-300 hidden">
-                                Initial sync time depends on your internet connection and hardware. Typically, it takes 24-48 hours to fully sync with the network.
-                            </div>
-                        </div>
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How long does it take to sync the node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        Initial sync time depends on your internet connection and hardware. Typically, it takes 24-48 hours to fully sync with the network.
+                    </div>
+                </div>
 
-                        <div class="border-b border-gray-700 pb-4">
-                            <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
-                                <span class="font-medium">How do I update my node?</span>
-                                <i class="fas fa-chevron-down transform transition-transform"></i>
-                            </button>
-                            <div class="mt-2 text-gray-300 hidden">
-                                To update your node, stop the current process, pull the latest changes from the repository, rebuild, and restart the node.
-                            </div>
-                        </div>
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How do I update my node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        To update your node, stop the current process, pull the latest changes from the repository, rebuild, and restart the node.
                     </div>
                 </div>
             </div>
