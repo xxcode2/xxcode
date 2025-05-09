@@ -371,64 +371,278 @@ cd planq</code></pre>
                     <span class="copy-notification text-green-400">Copied!</span>
                 </div>
             </div>
-        </div>
 
-        <!-- Configuration -->
-        <div class="mb-12">
-            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Configuration</h2>
-            <div class="code-block p-4 mb-2">
-                <pre class="text-zinc-300 overflow-x-auto"><code>planqd init mynode --chain-id planq_7000-1
-planqd config chain-id planq_7000-1</code></pre>
-                <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
-                    <i class="far fa-copy text-zinc-300"></i>
-                </button>
-                <span class="copy-notification text-green-400">Copied!</span>
+            <!-- Step 6 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">6</div>
+                    <h3 class="text-xl font-semibold">Initialize Node</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Initialize your Planq node with a custom moniker.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>planqd init mynode --chain-id planq_7000-1</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">7</div>
+                    <h3 class="text-xl font-semibold">Download Genesis File</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Download the genesis file for the Planq network.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>wget https://raw.githubusercontent.com/planq-network/networks/main/mainnet/genesis.json -O ~/.planqd/config/genesis.json</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">8</div>
+                    <h3 class="text-xl font-semibold">Configure Peers</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Add persistent peers to your configuration.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>PEERS="$(curl -s https://raw.githubusercontent.com/planq-network/networks/main/mainnet/peers.txt | head -n 10 | awk '{print $1}' | paste -s -d ',' -)"
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" ~/.planqd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 9 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">9</div>
+                    <h3 class="text-xl font-semibold">Configure State Sync</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Enable state sync for faster synchronization.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(enable[[:space:]]+=[[:space:]]+).*$#\1true#' ~/.planqd/config/config.toml
+sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"https://rpc.planq.network,https://rpc.planq.network"#' ~/.planqd/config/config.toml
+sed -i.bak -E 's#^(trust_height[[:space:]]+=[[:space:]]+).*$#\1"1"#' ~/.planqd/config/config.toml
+sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"0000000000000000000000000000000000000000000000000000000000000000"#' ~/.planqd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 10 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">10</div>
+                    <h3 class="text-xl font-semibold">Create Service File</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Create a systemd service file for automatic startup.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/planqd.service > /dev/null <<EOF
+[Unit]
+Description=Planq Node
+After=network.target
+
+[Service]
+Type=simple
+User=$USER
+WorkingDirectory=$HOME
+ExecStart=$(which planqd) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 11 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">11</div>
+                    <h3 class="text-xl font-semibold">Start Node Service</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Enable and start the Planq node service.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo systemctl daemon-reload
+sudo systemctl enable planqd
+sudo systemctl start planqd</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 12 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">12</div>
+                    <h3 class="text-xl font-semibold">Check Node Status</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Monitor your node's status and logs.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code># Check service status
+sudo systemctl status planqd
+
+# View logs
+sudo journalctl -u planqd -f
+
+# Check sync status
+planqd status 2>&1 | jq .SyncInfo</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
             </div>
         </div>
 
-        <!-- Start Node -->
+        <!-- Additional Configuration -->
         <div class="mb-12">
-            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Start Node</h2>
-            <div class="code-block p-4 mb-2">
-                <pre class="text-zinc-300 overflow-x-auto"><code>planqd start</code></pre>
-                <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
-                    <i class="far fa-copy text-zinc-300"></i>
-                </button>
-                <span class="copy-notification text-green-400">Copied!</span>
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Additional Configuration</h2>
+            
+            <!-- Pruning -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Configure Pruning</h3>
+                <p class="text-zinc-400 mb-4">Optimize storage usage by configuring pruning settings.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(pruning[[:space:]]+=[[:space:]]+).*$#\1"custom"#' ~/.planqd/config/app.toml
+sed -i.bak -E 's#^(pruning-keep-recent[[:space:]]+=[[:space:]]+).*$#\1"100"#' ~/.planqd/config/app.toml
+sed -i.bak -E 's#^(pruning-keep-every[[:space:]]+=[[:space:]]+).*$#\1"0"#' ~/.planqd/config/app.toml
+sed -i.bak -E 's#^(pruning-interval[[:space:]]+=[[:space:]]+).*$#\1"10"#' ~/.planqd/config/app.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Indexer -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Configure Indexer</h3>
+                <p class="text-zinc-400 mb-4">Enable the indexer for better query performance.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(indexer[[:space:]]+=[[:space:]]+).*$#\1"kv"#' ~/.planqd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Gas Prices -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Set Minimum Gas Prices</h3>
+                <p class="text-zinc-400 mb-4">Configure minimum gas prices for transactions.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"0.0001aplanq"#' ~/.planqd/config/app.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
             </div>
         </div>
 
-        <!-- FAQ Section -->
+        <!-- Monitoring -->
         <div class="mb-12">
-            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Frequently Asked Questions</h2>
-            <div class="space-y-4">
-                <div class="gradient-card p-6 rounded-xl">
-                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
-                        <span class="font-medium">What are the minimum system requirements?</span>
-                        <i class="fas fa-chevron-down transform transition-transform"></i>
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Monitoring Your Node</h2>
+            
+            <!-- Prometheus -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Enable Prometheus Metrics</h3>
+                <p class="text-zinc-400 mb-4">Enable Prometheus metrics for monitoring.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(prometheus[[:space:]]+=[[:space:]]+).*$#\1true#' ~/.planqd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
                     </button>
-                    <div class="mt-2 text-gray-300 hidden">
-                        The minimum requirements are 4GB RAM, 100GB storage, and a stable internet connection. For optimal performance, we recommend 8GB RAM and 200GB storage.
-                    </div>
+                    <span class="copy-notification text-green-400">Copied!</span>
                 </div>
+            </div>
 
-                <div class="gradient-card p-6 rounded-xl">
-                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
-                        <span class="font-medium">How long does it take to sync the node?</span>
-                        <i class="fas fa-chevron-down transform transition-transform"></i>
+            <!-- Useful Commands -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Useful Commands</h3>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code># Check node status
+planqd status 2>&1 | jq .
+
+# Check validator status
+planqd query staking validator $(planqd keys show wallet --bech val -a)
+
+# Check node info
+planqd query tendermint-validator-set
+
+# Check network info
+planqd query staking params
+
+# Check your balance
+planqd query bank balances $(planqd keys show wallet -a)</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
                     </button>
-                    <div class="mt-2 text-gray-300 hidden">
-                        Initial sync time depends on your internet connection and hardware. Typically, it takes 24-48 hours to fully sync with the network.
-                    </div>
+                    <span class="copy-notification text-green-400">Copied!</span>
                 </div>
+            </div>
+        </div>
 
-                <div class="gradient-card p-6 rounded-xl">
-                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
-                        <span class="font-medium">How do I update my node?</span>
-                        <i class="fas fa-chevron-down transform transition-transform"></i>
-                    </button>
-                    <div class="mt-2 text-gray-300 hidden">
-                        To update your node, stop the current process, pull the latest changes from the repository, rebuild, and restart the node.
+        <!-- Troubleshooting -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Troubleshooting</h2>
+            
+            <!-- Common Issues -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Common Issues and Solutions</h3>
+                <div class="space-y-4">
+                    <div class="gradient-card p-6 rounded-xl">
+                        <h4 class="font-semibold mb-2">Node Not Syncing</h4>
+                        <p class="text-zinc-400">If your node is not syncing, try these steps:</p>
+                        <ul class="list-disc list-inside text-zinc-400 mt-2 space-y-1">
+                            <li>Check your internet connection</li>
+                            <li>Verify that you have the correct genesis file</li>
+                            <li>Ensure your persistent peers are correctly configured</li>
+                            <li>Try resetting the node state and resyncing</li>
+                        </ul>
+                    </div>
+
+                    <div class="gradient-card p-6 rounded-xl">
+                        <h4 class="font-semibold mb-2">High Memory Usage</h4>
+                        <p class="text-zinc-400">If your node is using too much memory:</p>
+                        <ul class="list-disc list-inside text-zinc-400 mt-2 space-y-1">
+                            <li>Adjust the pruning settings</li>
+                            <li>Increase your swap space</li>
+                            <li>Monitor and kill unnecessary processes</li>
+                            <li>Consider upgrading your server's RAM</li>
+                        </ul>
+                    </div>
+
+                    <div class="gradient-card p-6 rounded-xl">
+                        <h4 class="font-semibold mb-2">Connection Issues</h4>
+                        <p class="text-zinc-400">If you're having connection problems:</p>
+                        <ul class="list-disc list-inside text-zinc-400 mt-2 space-y-1">
+                            <li>Check your firewall settings</li>
+                            <li>Verify port forwarding if behind NAT</li>
+                            <li>Ensure your node's ports are open</li>
+                            <li>Try using different persistent peers</li>
+                        </ul>
                     </div>
                 </div>
             </div>
