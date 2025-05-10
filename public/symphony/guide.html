@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symphony Node Installation Guide - xxcode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Roboto Mono', monospace;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.25rem;
+            color: #93c5fd;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-button:hover {
+            background: rgba(59, 130, 246, 0.3);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+
+        .note-box {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .note-box h4 {
+            color: #facc15;
+            margin-bottom: 0.5rem;
+        }
+
+        .note-box p {
+            color: #93c5fd;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-black"></div>
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute h-32 w-32 rounded-full bg-blue-500 blur-3xl top-1/4 left-1/4 animate-pulse"></div>
+            <div class="absolute h-48 w-48 rounded-full bg-blue-700 blur-3xl bottom-1/3 right-1/3 animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute h-24 w-24 rounded-full bg-blue-400 blur-3xl top-1/2 right-1/4 animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-10 px-6 py-4 md:px-12">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="flex items-center">
+                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <img src="../images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+                </div>
+                <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-10 container mx-auto px-6 py-8 md:px-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="logo-font text-4xl md:text-5xl font-bold mb-4 text-white">Symphony Node <span class="text-blue-400">Installation Guide</span></h1>
+                <p class="text-blue-100 text-lg">Step-by-step guide to set up your Symphony validator node</p>
+            </div>
+
+            <div class="gradient-card rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-white">System Requirements</h2>
+                <ul class="space-y-4 text-blue-100">
+                    <li class="flex items-start">
+                        <span class="step-number">1</span>
+                        <div>
+                            <h3 class="font-bold text-white">Hardware Requirements</h3>
+                            <p>4+ CPU cores, 16GB RAM, 500GB SSD storage</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="step-number">2</span>
+                        <div>
+                            <h3 class="font-bold text-white">Operating System</h3>
+                            <p>Ubuntu 20.04 LTS or newer</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="step-number">3</span>
+                        <div>
+                            <h3 class="font-bold text-white">Network</h3>
+                            <p>Stable internet connection with static IP</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="gradient-card rounded-xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-white">Installation Steps</h2>
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-white">1. System Preparation</h3>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install dependencies
+sudo apt install -y build-essential git curl wget jq</pre>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-white">2. Install Go</h3>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Install Go 1.20
+wget https://go.dev/dl/go1.20.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.20.linux-amd64.tar.gz
+rm go1.20.linux-amd64.tar.gz
+
+# Add Go to PATH
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+source ~/.bashrc</pre>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-white">3. Install Symphony</h3>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Clone repository
+git clone https://github.com/symphony-network/symphony.git
+cd symphony
+
+# Build binary
+make build
+
+# Move binary to system path
+sudo mv build/symphonyd /usr/local/bin/</pre>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-white">4. Initialize Node</h3>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Initialize node
+symphonyd init your-moniker --chain-id symphony-1
+
+# Download genesis file
+curl -s https://raw.githubusercontent.com/symphony-network/mainnet/main/genesis.json > ~/.symphony/config/genesis.json
+
+# Set minimum gas price
+sed -i 's/minimum-gas-prices = ""/minimum-gas-prices = "0.0001usymph"/' ~/.symphony/config/app.toml</pre>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-white">5. Configure Node</h3>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Add persistent peers
+sed -i 's/persistent_peers = ""/persistent_peers = "node1.symphony.network:26656,node2.symphony.network:26656"/' ~/.symphony/config/config.toml
+
+# Set pruning
+sed -i 's/pruning = "default"/pruning = "custom"/' ~/.symphony/config/app.toml
+sed -i 's/pruning-keep-recent = "0"/pruning-keep-recent = "100"/' ~/.symphony/config/app.toml
+sed -i 's/pruning-keep-every = "0"/pruning-keep-every = "0"/' ~/.symphony/config/app.toml
+sed -i 's/pruning-interval = "0"/pruning-interval = "10"/' ~/.symphony/config/app.toml</pre>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-white">6. Create Service</h3>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Create service file
+sudo tee /etc/systemd/system/symphonyd.service > /dev/null << EOF
+[Unit]
+Description=Symphony Node
+After=network.target
+
+[Service]
+Type=simple
+User=$USER
+WorkingDirectory=$HOME
+ExecStart=/usr/local/bin/symphonyd start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Start service
+sudo systemctl daemon-reload
+sudo systemctl enable symphonyd
+sudo systemctl start symphonyd</pre>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <h4>Important Notes</h4>
+                    <p>1. Replace 'your-moniker' with your desired validator name</p>
+                    <p>2. Make sure to backup your validator keys</p>
+                    <p>3. Wait for the node to sync before creating validator</p>
+                </div>
+            </div>
+
+            <div class="gradient-card rounded-xl p-8">
+                <h2 class="text-2xl font-bold mb-6 text-white">Useful Commands</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># Check node status
+symphonyd status
+
+# Check sync status
+symphonyd status 2>&1 | jq .SyncInfo
+
+# Check validator status
+symphonyd query staking validator $(symphonyd keys show wallet --bech val -a)</pre>
+                    </div>
+                    <div class="code-block">
+                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                        <pre># View logs
+sudo journalctl -u symphonyd -f
+
+# Restart node
+sudo systemctl restart symphonyd
+
+# Stop node
+sudo systemctl stop symphonyd</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html> 
