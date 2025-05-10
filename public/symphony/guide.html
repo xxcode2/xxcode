@@ -3,330 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symphony Setup Guide - xxcode</title>
+    <title>Planq Node Installation Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="/styles.css">
     <style>
-        .guide-section {
-            padding: 2rem 0;
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f0f0f;
+            color: #e2e8f0;
+        }
+        
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .guide-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
+        .xxcode-logo {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
         }
-
+        
         .code-block {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(59, 130, 246, 0.2);
+            background-color: #1a1a1a;
             border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin: 1rem 0;
             position: relative;
+            padding: 1rem;
+            margin: 1rem 0;
         }
-
+        
         .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+            overflow-x: auto;
+            padding: 0.5rem;
+            font-family: 'Courier New', monospace;
         }
-
+        
         .copy-button {
             position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
+            top: 0.75rem;
+            right: 0.75rem;
+            transition: all 0.2s;
             padding: 0.5rem;
-            background: rgba(59, 130, 246, 0.2);
-            border: none;
-            border-radius: 0.25rem;
-            color: #60a5fa;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border-radius: 0.375rem;
+            background-color: rgba(255, 255, 255, 0.1);
         }
-
+        
         .copy-button:hover {
-            background: rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.2);
         }
-
+        
+        .copy-notification {
+            position: absolute;
+            top: 0.75rem;
+            right: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+        }
+        
         .step-number {
-            width: 2rem;
-            height: 2rem;
-            background: linear-gradient(135deg, #3b82f6, #60a5fa);
-            border-radius: 50%;
+            background: linear-gradient(135deg, #4ade80, #facc15);
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 1rem;
+            border-radius: 50%;
+            font-weight: 600;
+            color: #1a1a1a;
         }
-
-        .note {
-            background: rgba(234, 179, 8, 0.1);
-            border: 1px solid rgba(234, 179, 8, 0.2);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 1rem 0;
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
         }
-
-        .note-title {
-            color: #facc15;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4ade80, #facc15);
+            transition: width 0.3s;
         }
-
-        .table-container {
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        table {
+        
+        .nav-link:hover::after {
             width: 100%;
-            border-collapse: collapse;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 0.5rem;
+        }
+        
+        .active-nav::after {
+            width: 100%;
         }
 
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        .xxcode-gradient {
+            background: linear-gradient(135deg, #4ade80, #facc15);
         }
 
-        th {
-            background: rgba(59, 130, 246, 0.1);
-            color: #60a5fa;
+        .xxcode-text-gradient {
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        tr:last-child td {
-            border-bottom: none;
+        .xxcode-border-gradient {
+            border: 1px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, #4ade80, #facc15);
+        }
+
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(250, 204, 21, 0.1));
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s;
+        }
+
+        .gradient-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.2);
+        }
+
+        #mobileMenu {
+            background-color: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
-    <!-- Animated Background -->
-    <div class="fixed inset-0 z-0">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-black"></div>
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute h-32 w-32 rounded-full bg-blue-500 blur-3xl top-1/4 left-1/4 animate-pulse"></div>
-            <div class="absolute h-48 w-48 rounded-full bg-blue-700 blur-3xl bottom-1/3 right-1/3 animate-pulse" style="animation-delay: 1s;"></div>
-            <div class="absolute h-24 w-24 rounded-full bg-blue-400 blur-3xl top-1/2 right-1/4 animate-pulse" style="animation-delay: 2s;"></div>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <a href="/" class="flex items-center">
+                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                        <img src="/images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
+                </a>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="/" class="nav-link text-gray-300 hover:text-white">Home</a>
+                <a href="/#services" class="nav-link active-nav text-white font-medium">Services</a>
+                <a href="/#about" class="nav-link text-gray-300 hover:text-white">About</a>
+                <a href="/#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </div>
-    </div>
-
-    <!-- Header -->
-    <header class="relative z-10 px-6 py-4 md:px-12">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="../index.html" class="flex items-center">
-                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                    <img src="../images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
-                </div>
-                <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
-            </a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="index.html" class="text-blue-100 hover:text-white transition-colors">Home</a>
-                <a href="index.html#features" class="text-blue-100 hover:text-white transition-colors">Features</a>
-                <a href="index.html#status" class="text-blue-100 hover:text-white transition-colors">Status</a>
-                <a href="../index.html#contact" class="text-blue-100 hover:text-white transition-colors">Contact</a>
-            </nav>
-            <button class="md:hidden text-blue-100 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden">
+            <div class="px-4 py-3 space-y-3">
+                <a href="/" class="block text-gray-300 hover:text-white">Home</a>
+                <a href="/#services" class="block text-white font-medium">Services</a>
+                <a href="/#about" class="block text-gray-300 hover:text-white">About</a>
+                <a href="/#contact" class="block text-gray-300 hover:text-white">Contact</a>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="relative z-10 container mx-auto px-6 py-8 md:px-12">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="logo-font text-4xl md:text-5xl font-bold mb-6 text-white">
-                Symphony <span class="text-blue-400">Setup Guide</span>
-            </h1>
-            <p class="text-xl text-blue-100 mb-8">
-                Complete guide to setting up and running a Symphony node
-            </p>
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 mt-24">
+        <!-- Breadcrumb -->
+        <div class="flex items-center text-sm mb-8 text-zinc-400">
+            <a href="/" class="hover:text-green-400">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/#services" class="hover:text-green-400">Services</a>
+            <span class="mx-2">/</span>
+            <span class="text-zinc-300">Planq Node Installation</span>
+        </div>
 
-            <!-- System Requirements -->
-            <section class="guide-section">
-                <h2 class="text-2xl font-bold mb-4 text-white">System Requirements</h2>
-                <div class="guide-card">
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Component</th>
-                                    <th>Minimum</th>
-                                    <th>Recommended</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>CPU</td>
-                                    <td>4 cores</td>
-                                    <td>8+ cores</td>
-                                </tr>
-                                <tr>
-                                    <td>RAM</td>
-                                    <td>8GB</td>
-                                    <td>16GB+</td>
-                                </tr>
-                                <tr>
-                                    <td>Storage</td>
-                                    <td>500GB SSD</td>
-                                    <td>1TB+ NVMe SSD</td>
-                                </tr>
-                                <tr>
-                                    <td>Network</td>
-                                    <td>100 Mbps</td>
-                                    <td>1 Gbps</td>
-                                </tr>
-                            </tbody>
-                        </table>
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 xxcode-text-gradient">Planq Node Installation Guide</h1>
+            <p class="text-zinc-400 max-w-3xl">A comprehensive guide to installing and configuring a Planq blockchain node on your server. Follow these steps to set up your node quickly and efficiently.</p>
+        </div>
+
+        <!-- Service Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-server text-green-500"></i>
                     </div>
+                    <h3 class="font-semibold">System Requirements</h3>
                 </div>
-            </section>
-
-            <!-- Installation Steps -->
-            <section class="guide-section">
-                <h2 class="text-2xl font-bold mb-4 text-white">Installation Steps</h2>
-
-                <!-- Step 1 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">1</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Update System</h3>
-                            <p class="text-blue-100 mb-4">First, update your system packages to ensure you have the latest security patches and dependencies.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
-                            </div>
-                        </div>
+                <ul class="text-zinc-400 space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-microchip mt-1 mr-2 text-zinc-500"></i>
+                        <span>4 CPU cores</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-memory mt-1 mr-2 text-zinc-500"></i>
+                        <span>8GB RAM</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-hdd mt-1 mr-2 text-zinc-500"></i>
+                        <span>200GB SSD storage</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-network-wired mt-1 mr-2 text-zinc-500"></i>
+                        <span>Stable internet connection</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full bg-yellow-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-clock text-yellow-500"></i>
                     </div>
+                    <h3 class="font-semibold">Estimated Time</h3>
                 </div>
-
-                <!-- Step 2 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">2</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Install Dependencies</h3>
-                            <p class="text-blue-100 mb-4">Install required dependencies for running a Symphony node.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>sudo apt install -y build-essential git curl wget jq</code></pre>
-                            </div>
-                        </div>
+                <ul class="text-zinc-400 space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-tools mt-1 mr-2 text-zinc-500"></i>
+                        <span>Setup: 15-20 minutes</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-sync mt-1 mr-2 text-zinc-500"></i>
+                        <span>Sync: 2-3 hours</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle mt-1 mr-2 text-zinc-500"></i>
+                        <span>Validation: 10 minutes</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="gradient-card p-6 rounded-xl">
+                <div class="flex items-center mb-4">
+                    <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
+                        <i class="fas fa-link text-green-500"></i>
                     </div>
+                    <h3 class="font-semibold">Useful Links</h3>
                 </div>
+                <ul class="text-zinc-400 space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-book mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://docs.planq.network/" target="_blank" class="text-green-400 hover:underline">Official Documentation</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fab fa-github mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://github.com/planq-network/planq" target="_blank" class="text-green-400 hover:underline">GitHub Repository</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fab fa-discord mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://discord.gg/planq-network" target="_blank" class="text-green-400 hover:underline">Discord Community</a>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-chart-line mt-1 mr-2 text-zinc-500"></i>
+                        <a href="https://explorer.planq.network/" target="_blank" class="text-green-400 hover:underline">Network Explorer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-                <!-- Step 3 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">3</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Install Go</h3>
-                            <p class="text-blue-100 mb-4">Install Go programming language required for Symphony.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
+        <!-- Installation Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Installation Steps</h2>
+            
+            <!-- Step 1 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">1</div>
+                    <h3 class="text-xl font-semibold">Update System Packages</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">First, make sure your system is up to date with the latest packages.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo apt update && sudo apt upgrade -y</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">2</div>
+                    <h3 class="text-xl font-semibold">Install Dependencies</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Install the necessary dependencies for the Symphony node software.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo apt install curl build-essential git wget jq make gcc tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip lz4 -y</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">3</div>
+                    <h3 class="text-xl font-semibold">Install Go</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Install Go programming language which is required for building the Symphony node.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go
-sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.20.5.linux-amd64.tar.gz
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 source ~/.bashrc</code></pre>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
                 </div>
+            </div>
 
-                <!-- Step 4 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">4</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Install Symphony</h3>
-                            <p class="text-blue-100 mb-4">Clone and build the Symphony repository.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>git clone https://github.com/symphony-network/symphony.git
-cd symphony
-make install</code></pre>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Step 4 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">4</div>
+                    <h3 class="text-xl font-semibold">Clone Symphony Repository</h3>
                 </div>
-
-                <!-- Step 5 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">5</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Initialize Node</h3>
-                            <p class="text-blue-100 mb-4">Initialize your Symphony node with a custom moniker.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>symphonyd init "your-moniker" --chain-id symphony-1</code></pre>
-                            </div>
-                        </div>
-                    </div>
+                <p class="text-zinc-400 mb-4 pl-11">Clone the official Symphony repository to your local machine.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>git clone https://github.com/symphony-network/symphony.git
+cd symphony</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
                 </div>
+            </div>
 
-                <!-- Step 6 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">6</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Configure Node</h3>
-                            <p class="text-blue-100 mb-4">Configure your node settings and download the genesis file.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>curl -s https://raw.githubusercontent.com/symphony-network/mainnet/main/genesis.json > ~/.symphony/config/genesis.json</code></pre>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Step 5 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">5</div>
+                    <h3 class="text-xl font-semibold">Build Symphony</h3>
                 </div>
+                <p class="text-zinc-400 mb-4 pl-11">Build the Symphony node software from source.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>make install</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
 
-                <!-- Step 7 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">7</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Create Service</h3>
-                            <p class="text-blue-100 mb-4">Create a systemd service for your Symphony node.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>sudo tee /etc/systemd/system/symphony.service > /dev/null << EOF
+            <!-- Step 6 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">6</div>
+                    <h3 class="text-xl font-semibold">Initialize Node</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Initialize your Symphony node with a custom moniker.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>symphonyd init mynode --chain-id symphony_1</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">7</div>
+                    <h3 class="text-xl font-semibold">Download Genesis File</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Download the genesis file for the Symphony network.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>wget https://raw.githubusercontent.com/symphony-network/networks/main/mainnet/genesis.json -O ~/.symphonyd/config/genesis.json</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">8</div>
+                    <h3 class="text-xl font-semibold">Configure Peers</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Add persistent peers to your configuration.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>PEERS="$(curl -s https://raw.githubusercontent.com/symphony-network/networks/main/mainnet/peers.txt | head -n 10 | awk '{print $1}' | paste -s -d ',' -)"
+sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" ~/.symphonyd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 9 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">9</div>
+                    <h3 class="text-xl font-semibold">Configure State Sync</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Enable state sync for faster synchronization.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(enable[[:space:]]+=[[:space:]]+).*$#\1true#' ~/.symphonyd/config/config.toml
+sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"https://rpc.symphony.network,https://rpc.symphony.network"#' ~/.symphonyd/config/config.toml
+sed -i.bak -E 's#^(trust_height[[:space:]]+=[[:space:]]+).*$#\1"1"#' ~/.symphonyd/config/config.toml
+sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"0000000000000000000000000000000000000000000000000000000000000000"#' ~/.symphonyd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 10 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">10</div>
+                    <h3 class="text-xl font-semibold">Create Service File</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Create a systemd service file for automatic startup.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo tee /etc/systemd/system/symphonyd.service > /dev/null
 [Unit]
 Description=Symphony Node
 After=network.target
@@ -343,247 +477,303 @@ LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 EOF</code></pre>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
                 </div>
+            </div>
 
-                <!-- Step 8 -->
-                <div class="guide-card">
-                    <div class="flex items-start mb-4">
-                        <div class="step-number">8</div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Start Node</h3>
-                            <p class="text-blue-100 mb-4">Start your Symphony node service.</p>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>sudo systemctl daemon-reload
-sudo systemctl enable symphony
-sudo systemctl start symphony</code></pre>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Step 11 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">11</div>
+                    <h3 class="text-xl font-semibold">Start Node Service</h3>
                 </div>
-            </section>
+                <p class="text-zinc-400 mb-4 pl-11">Enable and start the Symphony node service.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sudo systemctl daemon-reload
+sudo systemctl enable symphonyd
+sudo systemctl start symphonyd</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Step 12 -->
+            <div class="mb-10">
+                <div class="flex items-center mb-4">
+                    <div class="step-number mr-3">12</div>
+                    <h3 class="text-xl font-semibold">Check Node Status</h3>
+                </div>
+                <p class="text-zinc-400 mb-4 pl-11">Monitor your node's status and logs.</p>
+                <div class="code-block p-4 pl-11 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code># Check service status
+sudo systemctl status symphonyd
+
+# View logs
+sudo journalctl -u symphonyd -f
+
+# Check sync status
+symphonyd status 2>&1 | jq .SyncInfo</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Configuration -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Additional Configuration</h2>
+            
+            <!-- Pruning -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Configure Pruning</h3>
+                <p class="text-zinc-400 mb-4">Optimize storage usage by configuring pruning settings.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(pruning[[:space:]]+=[[:space:]]+).*$#\1"custom"#' ~/.symphonyd/config/app.toml
+sed -i.bak -E 's#^(pruning-keep-recent[[:space:]]+=[[:space:]]+).*$#\1"100"#' ~/.symphonyd/config/app.toml
+sed -i.bak -E 's#^(pruning-keep-every[[:space:]]+=[[:space:]]+).*$#\1"0"#' ~/.symphonyd/config/app.toml
+sed -i.bak -E 's#^(pruning-interval[[:space:]]+=[[:space:]]+).*$#\1"10"#' ~/.symphonyd/config/app.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Indexer -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Configure Indexer</h3>
+                <p class="text-zinc-400 mb-4">Enable the indexer for better query performance.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(indexer[[:space:]]+=[[:space:]]+).*$#\1"kv"#' ~/.symphonyd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+
+            <!-- Gas Prices -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Set Minimum Gas Prices</h3>
+                <p class="text-zinc-400 mb-4">Configure minimum gas prices for transactions.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"0.0001aplanq"#' ~/.symphonyd/config/app.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Monitoring Your Node</h2>
+            
+            <!-- Prometheus -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Enable Prometheus Metrics</h3>
+                <p class="text-zinc-400 mb-4">Enable Prometheus metrics for monitoring.</p>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code>sed -i.bak -E 's#^(prometheus[[:space:]]+=[[:space:]]+).*$#\1true#' ~/.symphonyd/config/config.toml</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
+                </div>
+            </div>
 
             <!-- Useful Commands -->
-            <section class="guide-section">
-                <h2 class="text-2xl font-bold mb-4 text-white">Useful Commands</h2>
-                <div class="guide-card">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <h3 class="text-lg font-bold mb-2 text-white">Check Node Status</h3>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>symphonyd status</code></pre>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-2 text-white">View Logs</h3>
-                            <div class="code-block">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code>sudo journalctl -u symphony -f</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Useful Commands</h3>
+                <div class="code-block p-4 mb-2">
+                    <pre class="text-zinc-300 overflow-x-auto"><code># Check node status
+symphonyd status 2>&1 | jq .
 
-            <!-- Notes -->
-            <section class="guide-section">
-                <h2 class="text-2xl font-bold mb-4 text-white">Important Notes</h2>
-                <div class="note">
-                    <div class="note-title">⚠️ Security Considerations</div>
-                    <p class="text-blue-100">Always keep your validator keys secure and never share them with anyone. Consider using a hardware wallet for additional security.</p>
-                </div>
-                <div class="note">
-                    <div class="note-title">💡 Performance Tips</div>
-                    <p class="text-blue-100">For optimal performance, ensure your node has sufficient resources and a stable internet connection. Regular maintenance and updates are recommended.</p>
-                </div>
-            </section>
+# Check validator status
+symphonyd query staking validator $(symphonyd keys show wallet --bech val -a)
 
-            <!-- Troubleshooting -->
-            <section class="guide-section">
-                <h2 class="text-2xl font-bold mb-4 text-white">Troubleshooting</h2>
-                <div class="guide-card">
-                    <h3 class="text-xl font-bold mb-4 text-white">Common Issues</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="text-lg font-bold mb-2 text-white">Node Not Syncing</h4>
-                            <p class="text-blue-100 mb-2">If your node is not syncing properly, try these steps:</p>
-                            <ul class="list-disc list-inside text-blue-100 space-y-2">
-                                <li>Check your internet connection</li>
-                                <li>Verify system requirements are met</li>
-                                <li>Check node logs for errors</li>
-                                <li>Try resetting the node</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold mb-2 text-white">High Resource Usage</h4>
-                            <p class="text-blue-100 mb-2">If your node is using too many resources:</p>
-                            <ul class="list-disc list-inside text-blue-100 space-y-2">
-                                <li>Check for background processes</li>
-                                <li>Optimize system settings</li>
-                                <li>Consider upgrading hardware</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
+# Check node info
+symphonyd query tendermint-validator-set
 
-            <!-- FAQ -->
-            <section class="guide-section">
-                <h2 class="text-2xl font-bold mb-4 text-white">Frequently Asked Questions</h2>
-                <div class="guide-card">
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="text-lg font-bold mb-2 text-white">How long does it take to sync?</h3>
-                            <p class="text-blue-100">Initial sync time depends on your hardware and internet connection. Typically, it takes 24-48 hours with recommended specifications.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-2 text-white">What are the minimum staking requirements?</h3>
-                            <p class="text-blue-100">The minimum staking amount is 1,000 SYMPHONY tokens. However, higher amounts increase your chances of being selected as a validator.</p>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-2 text-white">How do I update my node?</h3>
-                            <p class="text-blue-100">To update your node, follow these steps:</p>
-                            <div class="code-block mt-2">
-                                <button class="copy-button" onclick="copyCode(this)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                                    </svg>
-                                </button>
-                                <pre><code># Stop the node
-sudo systemctl stop symphony
+# Check network info
+symphonyd query staking params
 
-# Update the binary
-cd symphony
-git pull
-make install
-
-# Start the node
-sudo systemctl start symphony</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Additional Resources -->
-            <section class="guide-section">
-                <h2 class="text-2xl font-bold mb-4 text-white">Additional Resources</h2>
-                <div class="guide-card">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <h3 class="text-lg font-bold mb-2 text-white">Official Documentation</h3>
-                            <ul class="space-y-2">
-                                <li>
-                                    <a href="https://docs.symphony.network" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                        </svg>
-                                        Technical Documentation
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://api.symphony.network" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                        API Reference
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold mb-2 text-white">Community</h3>
-                            <ul class="space-y-2">
-                                <li>
-                                    <a href="https://discord.gg/symphony" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                        </svg>
-                                        Discord Community
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://github.com/symphony-network" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                                        </svg>
-                                        GitHub Repository
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="relative z-10 bg-gradient-to-t from-black to-transparent pt-12 pb-6 px-6">
-        <div class="container mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-                <div class="flex items-center mb-6 md:mb-0">
-                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                        <img src="../images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
-                    </div>
-                    <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v21.528l-2.58-2.28-1.452-1.344-1.536-1.428.636 2.22h-13.608c-1.356 0-2.46-1.104-2.46-2.472v-16.224c0-1.368 1.104-2.472 2.46-2.472h16.08zm-4.632 15.672c2.652-.084 3.672-1.824 3.672-1.824 0-3.864-1.728-6.996-1.728-6.996-1.728-1.296-3.372-1.26-3.372-1.26l-.168.192c2.04.624 2.988 1.524 2.988 1.524-1.248-.684-2.472-1.02-3.612-1.152-.864-.096-1.692-.072-2.424.024l-.204.024c-.42.036-1.44.192-2.724.756-.444.204-.708.348-.708.348s.996-.948 3.156-1.572l-.12-.144s-1.644-.036-3.372 1.26c0 0-1.728 3.132-1.728 6.996 0 0 1.008 1.74 3.66 1.824 0 0 .444-.54.804-.996-1.524-.456-2.1-1.416-2.1-1.416l.336.204.048.036.047.027.014.047.027c.3.168.6.3.876.408.492.192 1.08.384 1.764.516.9.168 1.956.228 3.108.012.564-.096 1.14-.264 1.74-.516.42-.156.888-.384 1.38-.708 0 0-.6.984-2.172 1.428.36.456.792.972.792.972zm-5.58-5.604c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332.012-.732-.54-1.332-1.224-1.332zm4.38 0c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332 0-.732-.54-1.332-1.224-1.332z"/>
-                        </svg>
-                    </a>
+# Check your balance
+symphonyd query bank balances $(symphonyd keys show wallet -a)</code></pre>
+                    <button class="copy-button bg-zinc-800 hover:bg-zinc-700 p-2 rounded-md" onclick="copyCode(this)">
+                        <i class="far fa-copy text-zinc-300"></i>
+                    </button>
+                    <span class="copy-notification text-green-400">Copied!</span>
                 </div>
             </div>
-            <div class="border-t border-blue-800 pt-6">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-blue-300 text-sm mb-4 md:mb-0">© 2023 xxcode. All rights reserved.</p>
-                    <div class="flex space-x-6">
-                        <a href="#" class="text-blue-300 hover:text-white text-sm">Privacy Policy</a>
-                        <a href="#" class="text-blue-300 hover:text-white text-sm">Terms of Service</a>
-                        <a href="#" class="text-blue-300 hover:text-white text-sm">Cookie Policy</a>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Troubleshooting</h2>
+            
+            <!-- Common Issues -->
+            <div class="mb-10">
+                <h3 class="text-xl font-semibold mb-4">Common Issues and Solutions</h3>
+                <div class="space-y-4">
+                    <div class="gradient-card p-6 rounded-xl">
+                        <h4 class="font-semibold mb-2">Node Not Syncing</h4>
+                        <p class="text-zinc-400">If your node is not syncing, try these steps:</p>
+                        <ul class="list-disc list-inside text-zinc-400 mt-2 space-y-1">
+                            <li>Check your internet connection</li>
+                            <li>Verify that you have the correct genesis file</li>
+                            <li>Ensure your persistent peers are correctly configured</li>
+                            <li>Try resetting the node state and resyncing</li>
+                        </ul>
+                    </div>
+
+                    <div class="gradient-card p-6 rounded-xl">
+                        <h4 class="font-semibold mb-2">High Memory Usage</h4>
+                        <p class="text-zinc-400">If your node is using too much memory:</p>
+                        <ul class="list-disc list-inside text-zinc-400 mt-2 space-y-1">
+                            <li>Adjust the pruning settings</li>
+                            <li>Increase your swap space</li>
+                            <li>Monitor and kill unnecessary processes</li>
+                            <li>Consider upgrading your server's RAM</li>
+                        </ul>
+                    </div>
+
+                    <div class="gradient-card p-6 rounded-xl">
+                        <h4 class="font-semibold mb-2">Connection Issues</h4>
+                        <p class="text-zinc-400">If you're having connection problems:</p>
+                        <ul class="list-disc list-inside text-zinc-400 mt-2 space-y-1">
+                            <li>Check your firewall settings</li>
+                            <li>Verify port forwarding if behind NAT</li>
+                            <li>Ensure your node's ports are open</li>
+                            <li>Try using different persistent peers</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
 
+        <!-- FAQ Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-8 xxcode-text-gradient">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What are the minimum system requirements?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        The minimum requirements are 4GB RAM, 100GB storage, and a stable internet connection. For optimal performance, we recommend 8GB RAM and 200GB storage.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How long does it take to sync the node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        Initial sync time depends on your internet connection and hardware. Typically, it takes 24-48 hours to fully sync with the network.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How do I update my node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        To update your node, stop the current process, pull the latest changes from the repository, rebuild, and restart the node.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What ports need to be open?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        The default ports that need to be open are 26656 (P2P) and 26657 (RPC). Make sure these ports are accessible if you're running a validator.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How do I check if my node is synced?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        You can check your node's sync status using the command: <code class="text-green-400">symphonyd status 2>&1 | jq .SyncInfo</code>. The node is fully synced when "catching_up" is false.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What is state sync and should I use it?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        State sync allows you to quickly sync your node by downloading a recent snapshot instead of replaying all transactions. It's recommended for faster initial sync, but you should verify the state sync providers are trustworthy.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">How do I backup my node?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        The most important files to backup are in the ~/.symphonyd/config directory, especially your priv_validator_key.json. You can use rsync or tar to create regular backups of these files.
+                    </div>
+                </div>
+
+                <div class="gradient-card p-6 rounded-xl">
+                    <button class="flex justify-between items-center w-full text-left" onclick="toggleFaq(this)">
+                        <span class="font-medium">What is pruning and how does it work?</span>
+                        <i class="fas fa-chevron-down transform transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-300 hidden">
+                        Pruning is a process that removes old transaction data to save disk space. The "custom" pruning strategy keeps the last 100 blocks by default, but you can adjust these settings based on your needs.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
     <script>
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            // Toggle answer visibility
+            answer.classList.toggle('hidden');
+            
+            // Rotate icon
+            icon.style.transform = answer.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
         function copyCode(button) {
-            const codeBlock = button.nextElementSibling;
-            const code = codeBlock.textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                button.classList.add('bg-blue-600');
+            const codeBlock = button.parentElement.querySelector('code');
+            const notification = button.nextElementSibling;
+            
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                notification.style.opacity = '1';
                 setTimeout(() => {
-                    button.classList.remove('bg-blue-600');
-                }, 1000);
+                    notification.style.opacity = '0';
+                }, 2000);
             });
         }
     </script>
