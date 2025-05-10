@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symphony - xxcode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .hero-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .feature-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-icon {
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .status-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .status-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .status-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #60a5fa;
+            margin-top: auto;
+        }
+
+        .status-label {
+            color: #93c5fd;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+
+        .badge-success {
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .badge-warning {
+            background: rgba(234, 179, 8, 0.1);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Animated Background -->
+    <div class="fixed inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900 to-black"></div>
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute h-32 w-32 rounded-full bg-blue-500 blur-3xl top-1/4 left-1/4 animate-pulse"></div>
+            <div class="absolute h-48 w-48 rounded-full bg-blue-700 blur-3xl bottom-1/3 right-1/3 animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute h-24 w-24 rounded-full bg-blue-400 blur-3xl top-1/2 right-1/4 animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-10 px-6 py-4 md:px-12">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="../index.html" class="flex items-center">
+                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <img src="../images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+                </div>
+                <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="container mx-auto px-6 py-16 md:px-12">
+                <div class="hero-content max-w-4xl">
+                    <h1 class="logo-font text-4xl md:text-6xl font-bold mb-6 text-white">
+                        Symphony <span class="text-blue-400">Network</span>
+                    </h1>
+                    <p class="text-xl text-blue-100 mb-8">
+                        The heart of the Cosmos ecosystem and interchain network. Symphony provides a secure and scalable infrastructure for cross-chain communication and interoperability.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="guide.html" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all shadow-lg hover:shadow-blue-500/30">
+                            Setup Guide
+                        </a>
+                        <a href="https://explorer.symphony.network" target="_blank" class="px-8 py-3 bg-transparent border border-blue-400 hover:bg-blue-600/20 text-blue-100 rounded-lg font-medium transition-all">
+                            Explorer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="text-center mb-16">
+                    <h2 class="logo-font text-3xl md:text-4xl font-bold mb-4 text-white">Key <span class="text-blue-400">Features</span></h2>
+                    <p class="text-blue-100 max-w-2xl mx-auto">
+                        Symphony offers a comprehensive suite of features designed to enhance the Cosmos ecosystem
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">High Performance</h3>
+                        <p class="text-blue-100">Optimized for speed and efficiency with advanced consensus mechanisms</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Enhanced Security</h3>
+                        <p class="text-blue-100">Advanced cryptographic protocols and robust validator network</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Cross-Chain Interoperability</h3>
+                        <p class="text-blue-100">Seamless communication between different blockchain networks</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Section -->
+        <section class="py-16 md:py-24 bg-gradient-to-b from-transparent to-blue-900/20">
+            <div class="container mx-auto px-6 md:px-12">
+                <div class="text-center mb-16">
+                    <h2 class="logo-font text-3xl md:text-4xl font-bold mb-4 text-white">Network <span class="text-blue-400">Status</span></h2>
+                    <p class="text-blue-100 max-w-2xl mx-auto">
+                        Real-time monitoring of Symphony network performance and statistics
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="status-card">
+                        <div class="status-header">
+                            <div class="status-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Network Status</h3>
+                                <span class="badge badge-success">Online</span>
+                            </div>
+                        </div>
+                        <div class="status-value">99.9%</div>
+                        <div class="status-label">Uptime</div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="status-header">
+                            <div class="status-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Block Height</h3>
+                                <span class="badge badge-warning">Syncing</span>
+                            </div>
+                        </div>
+                        <div class="status-value">1,234,567</div>
+                        <div class="status-label">Current Block</div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="status-header">
+                            <div class="status-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Validators</h3>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                        </div>
+                        <div class="status-value">150</div>
+                        <div class="status-label">Total Validators</div>
+                    </div>
+
+                    <div class="status-card">
+                        <div class="status-header">
+                            <div class="status-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white">Staking</h3>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                        </div>
+                        <div class="status-value">75%</div>
+                        <div class="status-label">Staking Ratio</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-gradient-to-t from-black to-transparent pt-12 pb-6 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                        <img src="../images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v21.528l-2.58-2.28-1.452-1.344-1.536-1.428.636 2.22h-13.608c-1.356 0-2.46-1.104-2.46-2.472v-16.224c0-1.368 1.104-2.472 2.46-2.472h16.08zm-4.632 15.672c2.652-.084 3.672-1.824 3.672-1.824 0-3.864-1.728-6.996-1.728-6.996-1.728-1.296-3.372-1.26-3.372-1.26l-.168.192c2.04.624 2.988 1.524 2.988 1.524-1.248-.684-2.472-1.02-3.612-1.152-.864-.096-1.692-.072-2.424.024l-.204.024c-.42.036-1.44.192-2.724.756-.444.204-.708.348-.708.348s.996-.948 3.156-1.572l-.12-.144s-1.644-.036-3.372 1.26c0 0-1.728 3.132-1.728 6.996 0 0 1.008 1.74 3.66 1.824 0 0 .444-.54.804-.996-1.524-.456-2.1-1.416-2.1-1.416l.336.204.048.036.047.027.014.047.027c.3.168.6.3.876.408.492.192 1.08.384 1.764.516.9.168 1.956.228 3.108.012.564-.096 1.14-.264 1.74-.516.42-.156.888-.384 1.38-.708 0 0-.6.984-2.172 1.428.36.456.792.972.792.972zm-5.58-5.604c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332.012-.732-.54-1.332-1.224-1.332zm4.38 0c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332 0-.732-.54-1.332-1.224-1.332z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-blue-800 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-blue-300 text-sm mb-4 md:mb-0">© 2023 xxcode. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-blue-300 hover:text-white text-sm">Privacy Policy</a>
+                        <a href="#" class="text-blue-300 hover:text-white text-sm">Terms of Service</a>
+                        <a href="#" class="text-blue-300 hover:text-white text-sm">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 
