@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symphony Node Installation Guide - xxcode</title>
+    <title>Symphony Setup Guide - xxcode</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
     <style>
-        .code-block {
+        .guide-section {
+            padding: 2rem 0;
+        }
+
+        .guide-card {
             background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 0.5rem;
-            padding: 1rem;
+            padding: 1.5rem;
             margin: 1rem 0;
-            font-family: 'Roboto Mono', monospace;
             position: relative;
         }
 
@@ -27,14 +38,13 @@
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
-            padding: 0.25rem 0.5rem;
+            padding: 0.5rem;
             background: rgba(59, 130, 246, 0.2);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: none;
             border-radius: 0.25rem;
-            color: #93c5fd;
-            font-size: 0.875rem;
+            color: #60a5fa;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
         }
 
         .copy-button:hover {
@@ -42,34 +52,57 @@
         }
 
         .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
             width: 2rem;
             height: 2rem;
             background: linear-gradient(135deg, #3b82f6, #60a5fa);
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
             font-weight: bold;
             margin-right: 1rem;
         }
 
-        .note-box {
+        .note {
             background: rgba(234, 179, 8, 0.1);
-            border: 1px solid rgba(234, 179, 8, 0.3);
+            border: 1px solid rgba(234, 179, 8, 0.2);
             border-radius: 0.5rem;
             padding: 1rem;
             margin: 1rem 0;
         }
 
-        .note-box h4 {
+        .note-title {
             color: #facc15;
+            font-weight: bold;
             margin-bottom: 0.5rem;
         }
 
-        .note-box p {
-            color: #93c5fd;
-            margin: 0;
+        .table-container {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        th {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
         }
     </style>
 </head>
@@ -93,126 +126,207 @@
                 </div>
                 <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
             </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-blue-100 hover:text-white transition-colors">Home</a>
+                <a href="index.html#features" class="text-blue-100 hover:text-white transition-colors">Features</a>
+                <a href="index.html#status" class="text-blue-100 hover:text-white transition-colors">Status</a>
+                <a href="../index.html#contact" class="text-blue-100 hover:text-white transition-colors">Contact</a>
+            </nav>
+            <button class="md:hidden text-blue-100 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </div>
     </header>
 
     <main class="relative z-10 container mx-auto px-6 py-8 md:px-12">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12">
-                <h1 class="logo-font text-4xl md:text-5xl font-bold mb-4 text-white">Symphony Node <span class="text-blue-400">Installation Guide</span></h1>
-                <p class="text-blue-100 text-lg">Step-by-step guide to set up your Symphony validator node</p>
-            </div>
+            <h1 class="logo-font text-4xl md:text-5xl font-bold mb-6 text-white">
+                Symphony <span class="text-blue-400">Setup Guide</span>
+            </h1>
+            <p class="text-xl text-blue-100 mb-8">
+                Complete guide to setting up and running a Symphony node
+            </p>
 
-            <div class="gradient-card rounded-xl p-8 mb-8">
-                <h2 class="text-2xl font-bold mb-6 text-white">System Requirements</h2>
-                <ul class="space-y-4 text-blue-100">
-                    <li class="flex items-start">
-                        <span class="step-number">1</span>
-                        <div>
-                            <h3 class="font-bold text-white">Hardware Requirements</h3>
-                            <p>4+ CPU cores, 16GB RAM, 500GB SSD storage</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="step-number">2</span>
-                        <div>
-                            <h3 class="font-bold text-white">Operating System</h3>
-                            <p>Ubuntu 20.04 LTS or newer</p>
-                        </div>
-                    </li>
-                    <li class="flex items-start">
-                        <span class="step-number">3</span>
-                        <div>
-                            <h3 class="font-bold text-white">Network</h3>
-                            <p>Stable internet connection with static IP</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <!-- System Requirements -->
+            <section class="guide-section">
+                <h2 class="text-2xl font-bold mb-4 text-white">System Requirements</h2>
+                <div class="guide-card">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Component</th>
+                                    <th>Minimum</th>
+                                    <th>Recommended</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>CPU</td>
+                                    <td>4 cores</td>
+                                    <td>8+ cores</td>
+                                </tr>
+                                <tr>
+                                    <td>RAM</td>
+                                    <td>8GB</td>
+                                    <td>16GB+</td>
+                                </tr>
+                                <tr>
+                                    <td>Storage</td>
+                                    <td>500GB SSD</td>
+                                    <td>1TB+ NVMe SSD</td>
+                                </tr>
+                                <tr>
+                                    <td>Network</td>
+                                    <td>100 Mbps</td>
+                                    <td>1 Gbps</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
 
-            <div class="gradient-card rounded-xl p-8 mb-8">
-                <h2 class="text-2xl font-bold mb-6 text-white">Installation Steps</h2>
-                
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-white">1. System Preparation</h3>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Update system
-sudo apt update && sudo apt upgrade -y
+            <!-- Installation Steps -->
+            <section class="guide-section">
+                <h2 class="text-2xl font-bold mb-4 text-white">Installation Steps</h2>
 
-# Install dependencies
-sudo apt install -y build-essential git curl wget jq</pre>
+                <!-- Step 1 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Update System</h3>
+                            <p class="text-blue-100 mb-4">First, update your system packages to ensure you have the latest security patches and dependencies.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>sudo apt update && sudo apt upgrade -y</code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-white">2. Install Go</h3>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Install Go 1.20
-wget https://go.dev/dl/go1.20.linux-amd64.tar.gz
+                <!-- Step 2 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Install Dependencies</h3>
+                            <p class="text-blue-100 mb-4">Install required dependencies for running a Symphony node.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>sudo apt install -y build-essential git curl wget jq</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Install Go</h3>
+                            <p class="text-blue-100 mb-4">Install Go programming language required for Symphony.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>wget https://go.dev/dl/go1.21.0.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go
-sudo tar -C /usr/local -xzf go1.20.linux-amd64.tar.gz
-rm go1.20.linux-amd64.tar.gz
-
-# Add Go to PATH
+sudo tar -C /usr/local -xzf go1.21.0.linux-amd64.tar.gz
 echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
-source ~/.bashrc</pre>
+source ~/.bashrc</code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-white">3. Install Symphony</h3>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Clone repository
-git clone https://github.com/symphony-network/symphony.git
+                <!-- Step 4 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">4</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Install Symphony</h3>
+                            <p class="text-blue-100 mb-4">Clone and build the Symphony repository.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>git clone https://github.com/symphony-network/symphony.git
 cd symphony
-
-# Build binary
-make build
-
-# Move binary to system path
-sudo mv build/symphonyd /usr/local/bin/</pre>
+make install</code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-white">4. Initialize Node</h3>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Initialize node
-symphonyd init your-moniker --chain-id symphony-1
-
-# Download genesis file
-curl -s https://raw.githubusercontent.com/symphony-network/mainnet/main/genesis.json > ~/.symphony/config/genesis.json
-
-# Set minimum gas price
-sed -i 's/minimum-gas-prices = ""/minimum-gas-prices = "0.0001usymph"/' ~/.symphony/config/app.toml</pre>
+                <!-- Step 5 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">5</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Initialize Node</h3>
+                            <p class="text-blue-100 mb-4">Initialize your Symphony node with a custom moniker.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>symphonyd init "your-moniker" --chain-id symphony-1</code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-white">5. Configure Node</h3>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Add persistent peers
-sed -i 's/persistent_peers = ""/persistent_peers = "node1.symphony.network:26656,node2.symphony.network:26656"/' ~/.symphony/config/config.toml
-
-# Set pruning
-sed -i 's/pruning = "default"/pruning = "custom"/' ~/.symphony/config/app.toml
-sed -i 's/pruning-keep-recent = "0"/pruning-keep-recent = "100"/' ~/.symphony/config/app.toml
-sed -i 's/pruning-keep-every = "0"/pruning-keep-every = "0"/' ~/.symphony/config/app.toml
-sed -i 's/pruning-interval = "0"/pruning-interval = "10"/' ~/.symphony/config/app.toml</pre>
+                <!-- Step 6 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">6</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Configure Node</h3>
+                            <p class="text-blue-100 mb-4">Configure your node settings and download the genesis file.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>curl -s https://raw.githubusercontent.com/symphony-network/mainnet/main/genesis.json > ~/.symphony/config/genesis.json</code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-white">6. Create Service</h3>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Create service file
-sudo tee /etc/systemd/system/symphonyd.service > /dev/null << EOF
+                <!-- Step 7 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">7</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Create Service</h3>
+                            <p class="text-blue-100 mb-4">Create a systemd service for your Symphony node.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>sudo tee /etc/systemd/system/symphony.service > /dev/null << EOF
 [Unit]
 Description=Symphony Node
 After=network.target
@@ -221,70 +335,137 @@ After=network.target
 Type=simple
 User=$USER
 WorkingDirectory=$HOME
-ExecStart=/usr/local/bin/symphonyd start
+ExecStart=$(which symphonyd) start
 Restart=on-failure
 RestartSec=10
 LimitNOFILE=65535
 
 [Install]
 WantedBy=multi-user.target
-EOF
-
-# Start service
-sudo systemctl daemon-reload
-sudo systemctl enable symphonyd
-sudo systemctl start symphonyd</pre>
+EOF</code></pre>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="note-box">
-                    <h4>Important Notes</h4>
-                    <p>1. Replace 'your-moniker' with your desired validator name</p>
-                    <p>2. Make sure to backup your validator keys</p>
-                    <p>3. Wait for the node to sync before creating validator</p>
+                <!-- Step 8 -->
+                <div class="guide-card">
+                    <div class="flex items-start mb-4">
+                        <div class="step-number">8</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-white">Start Node</h3>
+                            <p class="text-blue-100 mb-4">Start your Symphony node service.</p>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>sudo systemctl daemon-reload
+sudo systemctl enable symphony
+sudo systemctl start symphony</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Useful Commands -->
+            <section class="guide-section">
+                <h2 class="text-2xl font-bold mb-4 text-white">Useful Commands</h2>
+                <div class="guide-card">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold mb-2 text-white">Check Node Status</h3>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>symphonyd status</code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-2 text-white">View Logs</h3>
+                            <div class="code-block">
+                                <button class="copy-button" onclick="copyCode(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                                <pre><code>sudo journalctl -u symphony -f</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notes -->
+            <section class="guide-section">
+                <h2 class="text-2xl font-bold mb-4 text-white">Important Notes</h2>
+                <div class="note">
+                    <div class="note-title">⚠️ Security Considerations</div>
+                    <p class="text-blue-100">Always keep your validator keys secure and never share them with anyone. Consider using a hardware wallet for additional security.</p>
+                </div>
+                <div class="note">
+                    <div class="note-title">💡 Performance Tips</div>
+                    <p class="text-blue-100">For optimal performance, ensure your node has sufficient resources and a stable internet connection. Regular maintenance and updates are recommended.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 bg-gradient-to-t from-black to-transparent pt-12 pb-6 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                        <img src="../images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h1 class="logo-font text-3xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</h1>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon w-10 h-10 rounded-full bg-blue-800 hover:bg-blue-700 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v21.528l-2.58-2.28-1.452-1.344-1.536-1.428.636 2.22h-13.608c-1.356 0-2.46-1.104-2.46-2.472v-16.224c0-1.368 1.104-2.472 2.46-2.472h16.08zm-4.632 15.672c2.652-.084 3.672-1.824 3.672-1.824 0-3.864-1.728-6.996-1.728-6.996-1.728-1.296-3.372-1.26-3.372-1.26l-.168.192c2.04.624 2.988 1.524 2.988 1.524-1.248-.684-2.472-1.02-3.612-1.152-.864-.096-1.692-.072-2.424.024l-.204.024c-.42.036-1.44.192-2.724.756-.444.204-.708.348-.708.348s.996-.948 3.156-1.572l-.12-.144s-1.644-.036-3.372 1.26c0 0-1.728 3.132-1.728 6.996 0 0 1.008 1.74 3.66 1.824 0 0 .444-.54.804-.996-1.524-.456-2.1-1.416-2.1-1.416l.336.204.048.036.047.027.014.047.027c.3.168.6.3.876.408.492.192 1.08.384 1.764.516.9.168 1.956.228 3.108.012.564-.096 1.14-.264 1.74-.516.42-.156.888-.384 1.38-.708 0 0-.6.984-2.172 1.428.36.456.792.972.792.972zm-5.58-5.604c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332.012-.732-.54-1.332-1.224-1.332zm4.38 0c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332 0-.732-.54-1.332-1.224-1.332z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
-
-            <div class="gradient-card rounded-xl p-8">
-                <h2 class="text-2xl font-bold mb-6 text-white">Useful Commands</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># Check node status
-symphonyd status
-
-# Check sync status
-symphonyd status 2>&1 | jq .SyncInfo
-
-# Check validator status
-symphonyd query staking validator $(symphonyd keys show wallet --bech val -a)</pre>
-                    </div>
-                    <div class="code-block">
-                        <button class="copy-button" onclick="copyCode(this)">Copy</button>
-                        <pre># View logs
-sudo journalctl -u symphonyd -f
-
-# Restart node
-sudo systemctl restart symphonyd
-
-# Stop node
-sudo systemctl stop symphonyd</pre>
+            <div class="border-t border-blue-800 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-blue-300 text-sm mb-4 md:mb-0">© 2023 xxcode. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-blue-300 hover:text-white text-sm">Privacy Policy</a>
+                        <a href="#" class="text-blue-300 hover:text-white text-sm">Terms of Service</a>
+                        <a href="#" class="text-blue-300 hover:text-white text-sm">Cookie Policy</a>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </footer>
 
     <script>
         function copyCode(button) {
             const codeBlock = button.nextElementSibling;
-            const text = codeBlock.textContent;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                button.textContent = 'Copied!';
+            const code = codeBlock.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                button.classList.add('bg-blue-600');
                 setTimeout(() => {
-                    button.textContent = 'Copy';
-                }, 2000);
+                    button.classList.remove('bg-blue-600');
+                }, 1000);
             });
         }
     </script>
