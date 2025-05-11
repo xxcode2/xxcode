@@ -167,16 +167,15 @@
             top: 0;
             right: 0;
             bottom: 0;
-            width: 250px;
+            width: 100%;
             background: linear-gradient(to bottom, #0F3460, #16213E);
             padding: 2rem;
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
             z-index: 50;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .mobile-menu.active {
-            transform: translateX(0);
             display: block;
         }
 
@@ -189,6 +188,7 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
             z-index: 40;
+            backdrop-filter: blur(4px);
         }
 
         .mobile-menu-overlay.active {
@@ -201,6 +201,7 @@
             color: white;
             font-size: 1.1rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
 
         .mobile-menu a:hover {
@@ -213,6 +214,7 @@
             right: 1rem;
             color: white;
             cursor: pointer;
+            z-index: 51;
         }
 
         @media (max-width: 768px) {
@@ -229,6 +231,10 @@
                 width: 24px;
                 height: 24px;
                 font-size: 12px;
+            }
+
+            .mobile-menu {
+                padding-top: 4rem;
             }
         }
     </style>
@@ -251,16 +257,16 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </div>
-        <div class="flex items-center mb-8">
-            <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+        <div class="flex flex-col items-center mb-8">
+            <div class="w-16 h-16 rounded-full overflow-hidden mb-4">
                 <img src="/images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
             </div>
-            <span class="text-xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</span>
+            <span class="text-2xl font-bold mb-8" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</span>
+            <a href="/#home" class="w-full text-center py-4 hover:text-blue-400 transition-colors">Home</a>
+            <a href="/#services" class="w-full text-center py-4 hover:text-blue-400 transition-colors">Services</a>
+            <a href="/#about" class="w-full text-center py-4 hover:text-blue-400 transition-colors">About</a>
+            <a href="/#contact" class="w-full text-center py-4 hover:text-blue-400 transition-colors">Contact</a>
         </div>
-        <a href="/#home" class="hover:text-blue-400 transition-colors">Home</a>
-        <a href="/#services" class="hover:text-blue-400 transition-colors">Services</a>
-        <a href="/#about" class="hover:text-blue-400 transition-colors">About</a>
-        <a href="/#contact" class="hover:text-blue-400 transition-colors">Contact</a>
     </div>
 
     <!-- Navbar -->
