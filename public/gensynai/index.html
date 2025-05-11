@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenSynAI Testnet Installation Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        .code-block {
+            font-family: 'Courier New', monospace;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        .step-number {
+            background-color: #3b82f6;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .command-copy {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .command-copy:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .code-container {
+            position: relative;
+        }
+
+        .copy-success {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: #10b981;
+            color: white;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16">
+            <div class="container mx-auto px-4 md:px-8">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">GenSynAI Testnet Installation Guide</h1>
+                <p class="text-xl opacity-90 max-w-2xl">Complete guide to install, configure and run GenSynAI on the testnet environment</p>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 md:px-8 py-12">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">System Requirements</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-microchip text-blue-600 text-xl mr-3"></i>
+                            <h3 class="font-semibold text-lg">CPU</h3>
+                        </div>
+                        <p class="text-gray-700">4+ cores, 2.5+ GHz</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-memory text-blue-600 text-xl mr-3"></i>
+                            <h3 class="font-semibold text-lg">RAM</h3>
+                        </div>
+                        <p class="text-gray-700">16GB+ (32GB recommended)</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-hdd text-blue-600 text-xl mr-3"></i>
+                            <h3 class="font-semibold text-lg">Storage</h3>
+                        </div>
+                        <p class="text-gray-700">100GB+ SSD (NVMe preferred)</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-network-wired text-blue-600 text-xl mr-3"></i>
+                            <h3 class="font-semibold text-lg">Network</h3>
+                        </div>
+                        <p class="text-gray-700">100+ Mbps, stable connection</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-linux text-blue-600 text-xl mr-3"></i>
+                            <h3 class="font-semibold text-lg">OS</h3>
+                        </div>
+                        <p class="text-gray-700">Ubuntu 20.04+ or similar Linux</p>
+                    </div>
+                    <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-wallet text-blue-600 text-xl mr-3"></i>
+                            <h3 class="font-semibold text-lg">Wallet</h3>
+                        </div>
+                        <p class="text-gray-700">Testnet tokens for transactions</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Installation Steps -->
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-12">
+                <h2 class="text-2xl font-bold mb-8 text-gray-800">Installation Steps</h2>
+                
+                <!-- Tabs -->
+                <div class="mb-6 border-b border-gray-200">
+                    <div class="flex flex-wrap -mb-px">
+                        <button class="tab-button active px-6 py-3 font-medium text-sm rounded-t-lg" data-tab="automatic">
+                            Automatic Installation
+                        </button>
+                        <button class="tab-button px-6 py-3 font-medium text-sm rounded-t-lg" data-tab="manual">
+                            Manual Installation
+                        </button>
+                        <button class="tab-button px-6 py-3 font-medium text-sm rounded-t-lg" data-tab="docker">
+                            Docker Installation
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Tab Contents -->
+                <div class="tab-content active" id="automatic-content">
+                    <!-- Step 1 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">1</div>
+                            <h3 class="text-xl font-semibold">Update your system</h3>
+                        </div>
+                        <p class="mb-3 text-gray-700">First, make sure your system is up to date:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>sudo apt update && sudo apt upgrade -y</pre>
+                            </div>
+                            <button class="command-copy" data-command="sudo apt update && sudo apt upgrade -y">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">2</div>
+                            <h3 class="text-xl font-semibold">Download the installation script</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>wget -O gensynai_install.sh https://raw.githubusercontent.com/xxcode2/xxcode/main/scripts/gensynai_testnet_install.sh</pre>
+                            </div>
+                            <button class="command-copy" data-command="wget -O gensynai_install.sh https://raw.githubusercontent.com/xxcode2/xxcode/main/scripts/gensynai_testnet_install.sh">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">3</div>
+                            <h3 class="text-xl font-semibold">Make the script executable</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>chmod +x gensynai_install.sh</pre>
+                            </div>
+                            <button class="command-copy" data-command="chmod +x gensynai_install.sh">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">4</div>
+                            <h3 class="text-xl font-semibold">Run the installation script</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>./gensynai_install.sh</pre>
+                            </div>
+                            <button class="command-copy" data-command="./gensynai_install.sh">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
+                            <p class="text-blue-700">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                The script will prompt you for your wallet address and other configuration options. Follow the on-screen instructions.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">5</div>
+                            <h3 class="text-xl font-semibold">Verify the installation</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>gensynai --version</pre>
+                            </div>
+                            <button class="command-copy" data-command="gensynai --version">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-4 text-green-600 font-medium">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            If you see the version number, GenSynAI has been successfully installed!
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="manual-content">
+                    <!-- Step 1 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">1</div>
+                            <h3 class="text-xl font-semibold">Install dependencies</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>sudo apt update && sudo apt install -y build-essential git curl wget jq make gcc g++ libssl-dev pkg-config</pre>
+                            </div>
+                            <button class="command-copy" data-command="sudo apt update && sudo apt install -y build-essential git curl wget jq make gcc g++ libssl-dev pkg-config">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">2</div>
+                            <h3 class="text-xl font-semibold">Install Rust</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</pre>
+                            </div>
+                            <button class="command-copy" data-command="curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-2 mb-4 text-gray-700">Follow the on-screen instructions and select option 1 for the default installation. Then, update your PATH:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>source $HOME/.cargo/env</pre>
+                            </div>
+                            <button class="command-copy" data-command="source $HOME/.cargo/env">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">3</div>
+                            <h3 class="text-xl font-semibold">Clone the repository</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>git clone https://github.com/xxcode2/gensynai.git
+cd gensynai</pre>
+                            </div>
+                            <button class="command-copy" data-command="git clone https://github.com/xxcode2/gensynai.git
+cd gensynai">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">4</div>
+                            <h3 class="text-xl font-semibold">Switch to testnet branch</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>git checkout testnet</pre>
+                            </div>
+                            <button class="command-copy" data-command="git checkout testnet">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">5</div>
+                            <h3 class="text-xl font-semibold">Build from source</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>cargo build --release</pre>
+                            </div>
+                            <button class="command-copy" data-command="cargo build --release">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mt-4">
+                            <p class="text-yellow-700">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>
+                                This process may take 15-30 minutes depending on your system specifications.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 6 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">6</div>
+                            <h3 class="text-xl font-semibold">Create configuration file</h3>
+                        </div>
+                        <p class="mb-3 text-gray-700">Create a config directory and configuration file:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>mkdir -p ~/.gensynai
+nano ~/.gensynai/config.toml</pre>
+                            </div>
+                            <button class="command-copy" data-command="mkdir -p ~/.gensynai
+nano ~/.gensynai/config.toml">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-3 mb-3 text-gray-700">Add the following configuration (replace with your wallet address):</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>[node]
+network = "testnet"
+endpoint = "https://testnet-rpc.gensynai.io"
+wallet_address = "YOUR_WALLET_ADDRESS"
+log_level = "info"
+
+[validator]
+stake_amount = 1000
+commission_rate = 0.05
+
+[storage]
+path = "~/.gensynai/data"
+max_size_gb = 50</pre>
+                            </div>
+                            <button class="command-copy" data-command="[node]
+network = \"testnet\"
+endpoint = \"https://testnet-rpc.gensynai.io\"
+wallet_address = \"YOUR_WALLET_ADDRESS\"
+log_level = \"info\"
+
+[validator]
+stake_amount = 1000
+commission_rate = 0.05
+
+[storage]
+path = \"~/.gensynai/data\"
+max_size_gb = 50">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-2 text-gray-700">Save the file by pressing <code class="bg-gray-100 px-2 py-1 rounded">Ctrl+X</code>, then <code class="bg-gray-100 px-2 py-1 rounded">Y</code>, then <code class="bg-gray-100 px-2 py-1 rounded">Enter</code>.</p>
+                    </div>
+                    
+                    <!-- Step 7 -->
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">7</div>
+                            <h3 class="text-xl font-semibold">Start the GenSynAI node</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>./target/release/gensynai --testnet</pre>
+                            </div>
+                            <button class="command-copy" data-command="./target/release/gensynai --testnet">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-4 text-green-600 font-medium">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Your GenSynAI node should now be running on the testnet!
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="docker-content">
+                    <!-- Step 1 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">1</div>
+                            <h3 class="text-xl font-semibold">Install Docker</h3>
+                        </div>
+                        <p class="mb-3 text-gray-700">If you don't have Docker installed:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh</pre>
+                            </div>
+                            <button class="command-copy" data-command="curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">2</div>
+                            <h3 class="text-xl font-semibold">Create configuration directory</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>mkdir -p ~/.gensynai</pre>
+                            </div>
+                            <button class="command-copy" data-command="mkdir -p ~/.gensynai">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">3</div>
+                            <h3 class="text-xl font-semibold">Create configuration file</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>nano ~/.gensynai/config.toml</pre>
+                            </div>
+                            <button class="command-copy" data-command="nano ~/.gensynai/config.toml">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-3 mb-3 text-gray-700">Add the following configuration (replace with your wallet address):</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>[node]
+network = "testnet"
+endpoint = "https://testnet-rpc.gensynai.io"
+wallet_address = "YOUR_WALLET_ADDRESS"
+log_level = "info"
+
+[validator]
+stake_amount = 1000
+commission_rate = 0.05
+
+[storage]
+path = "/data"
+max_size_gb = 50</pre>
+                            </div>
+                            <button class="command-copy" data-command="[node]
+network = \"testnet\"
+endpoint = \"https://testnet-rpc.gensynai.io\"
+wallet_address = \"YOUR_WALLET_ADDRESS\"
+log_level = \"info\"
+
+[validator]
+stake_amount = 1000
+commission_rate = 0.05
+
+[storage]
+path = \"/data\"
+max_size_gb = 50">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-2 text-gray-700">Save the file by pressing <code class="bg-gray-100 px-2 py-1 rounded">Ctrl+X</code>, then <code class="bg-gray-100 px-2 py-1 rounded">Y</code>, then <code class="bg-gray-100 px-2 py-1 rounded">Enter</code>.</p>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">4</div>
+                            <h3 class="text-xl font-semibold">Run the Docker container</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>docker run -d \
+  --name gensynai-testnet \
+  -v ~/.gensynai:/config \
+  -v ~/.gensynai/data:/data \
+  -p 8545:8545 \
+  -p 30303:30303 \
+  --restart unless-stopped \
+  xxcode2/gensynai:testnet</pre>
+                            </div>
+                            <button class="command-copy" data-command="docker run -d \
+  --name gensynai-testnet \
+  -v ~/.gensynai:/config \
+  -v ~/.gensynai/data:/data \
+  -p 8545:8545 \
+  -p 30303:30303 \
+  --restart unless-stopped \
+  xxcode2/gensynai:testnet">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        <p class="mt-4 text-green-600 font-medium">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            Your GenSynAI node should now be running in a Docker container!
+                        </p>
+                    </div>
+                    
+                    <!-- Step 5 -->
+                    <div class="mt-8">
+                        <div class="flex items-center mb-4">
+                            <div class="step-number mr-3">5</div>
+                            <h3 class="text-xl font-semibold">Check container logs</h3>
+                        </div>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>docker logs -f gensynai-testnet</pre>
+                            </div>
+                            <button class="command-copy" data-command="docker logs -f gensynai-testnet">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Configuration -->
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Configuration Options</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="py-3 px-4 text-left text-gray-700 font-semibold border-b">Option</th>
+                                <th class="py-3 px-4 text-left text-gray-700 font-semibold border-b">Description</th>
+                                <th class="py-3 px-4 text-left text-gray-700 font-semibold border-b">Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">network</code></td>
+                                <td class="py-3 px-4 border-b">Network to connect to (testnet or mainnet)</td>
+                                <td class="py-3 px-4 border-b">testnet</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">endpoint</code></td>
+                                <td class="py-3 px-4 border-b">RPC endpoint for the network</td>
+                                <td class="py-3 px-4 border-b">https://testnet-rpc.gensynai.io</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">wallet_address</code></td>
+                                <td class="py-3 px-4 border-b">Your wallet address for rewards</td>
+                                <td class="py-3 px-4 border-b">Required</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">log_level</code></td>
+                                <td class="py-3 px-4 border-b">Logging level (debug, info, warn, error)</td>
+                                <td class="py-3 px-4 border-b">info</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">stake_amount</code></td>
+                                <td class="py-3 px-4 border-b">Amount of tokens to stake as validator</td>
+                                <td class="py-3 px-4 border-b">1000</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">commission_rate</code></td>
+                                <td class="py-3 px-4 border-b">Validator commission rate (0.01-0.20)</td>
+                                <td class="py-3 px-4 border-b">0.05</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">storage.path</code></td>
+                                <td class="py-3 px-4 border-b">Path to store blockchain data</td>
+                                <td class="py-3 px-4 border-b">~/.gensynai/data</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 border-b"><code class="bg-gray-100 px-2 py-1 rounded">storage.max_size_gb</code></td>
+                                <td class="py-3 px-4 border-b">Maximum storage size in GB</td>
+                                <td class="py-3 px-4 border-b">50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Node Management -->
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Node Management</h2>
+                
+                <div class="space-y-8">
+                    <!-- Running as a Service -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Running as a Systemd Service</h3>
+                        <p class="mb-4 text-gray-700">For better reliability, you can run GenSynAI as a systemd service:</p>
+                        
+                        <p class="mb-2 text-gray-700">1. Create a systemd service file:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>sudo nano /etc/systemd/system/gensynai.service</pre>
+                            </div>
+                            <button class="command-copy" data-command="sudo nano /etc/systemd/system/gensynai.service">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        
+                        <p class="mt-3 mb-2 text-gray-700">2. Add the following content:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>[Unit]
+Description=GenSynAI Testnet Node
+After=network.target
+
+[Service]
+User=$USER
+Type=simple
+ExecStart=/home/$USER/gensynai/target/release/gensynai --testnet
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target</pre>
+                            </div>
+                            <button class="command-copy" data-command="[Unit]
+Description=GenSynAI Testnet Node
+After=network.target
+
+[Service]
+User=$USER
+Type=simple
+ExecStart=/home/$USER/gensynai/target/release/gensynai --testnet
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        
+                        <p class="mt-3 mb-2 text-gray-700">3. Enable and start the service:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>sudo systemctl daemon-reload
+sudo systemctl enable gensynai
+sudo systemctl start gensynai</pre>
+                            </div>
+                            <button class="command-copy" data-command="sudo systemctl daemon-reload
+sudo systemctl enable gensynai
+sudo systemctl start gensynai">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        
+                        <p class="mt-3 mb-2 text-gray-700">4. Check the service status:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>sudo systemctl status gensynai</pre>
+                            </div>
+                            <button class="command-copy" data-command="sudo systemctl status gensynai">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Monitoring -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Monitoring Your Node</h3>
+                        <p class="mb-4 text-gray-700">Check the node status and logs:</p>
+                        
+                        <p class="mb-2 text-gray-700">View logs:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>sudo journalctl -u gensynai -f</pre>
+                            </div>
+                            <button class="command-copy" data-command="sudo journalctl -u gensynai -f">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                        
+                        <p class="mt-3 mb-2 text-gray-700">Check node status via API:</p>
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>curl -X GET http://localhost:8545/api/v1/status</pre>
+                            </div>
+                            <button class="command-copy" data-command="curl -X GET http://localhost:8545/api/v1/status">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Updating -->
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Updating Your Node</h3>
+                        <p class="mb-4 text-gray-700">To update your GenSynAI node to the latest version:</p>
+                        
+                        <div class="code-container">
+                            <div class="code-block">
+                                <pre>cd ~/gensynai
+git pull
+git checkout testnet
+cargo build --release
+sudo systemctl restart gensynai</pre>
+                            </div>
+                            <button class="command-copy" data-command="cd ~/gensynai
+git pull
+git checkout testnet
+cargo build --release
+sudo systemctl restart gensynai">
+                                <i class="far fa-copy"></i> Copy
+                            </button>
+                            <div class="copy-success">Copied!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Troubleshooting -->
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Troubleshooting</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-orange-50 border-l-4 border-orange-400 p-5 rounded">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-orange-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-lg font-medium text-orange-800">Connection Issues</h3>
+                                <div class="mt-2 text-orange-700">
+                                    <p>If your node cannot connect to the testnet:</p>
+                                    <pre class="bg-orange-100 p-2 mt-2 rounded text-sm">Error: Failed to connect to testnet RPC endpoint</pre>
+                                    <p class="mt-2 font-medium">Solution:</p>
+                                    <p>Check your internet connection and firewall settings. Make sure ports 8545 and 30303 are open.</p>
+                                    <pre class="bg-orange-100 p-2 mt-2 rounded text-sm">sudo ufw allow 8545
+sudo ufw allow 30303</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-orange-50 border-l-4 border-orange-400 p-5 rounded">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-orange-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-lg font-medium text-orange-800">Syncing Issues</h3>
+                                <div class="mt-2 text-orange-700">
+                                    <p>If your node is stuck syncing:</p>
+                                    <pre class="bg-orange-100 p-2 mt-2 rounded text-sm">Warning: Node is not syncing or sync is very slow</pre>
+                                    <p class="mt-2 font-medium">Solution:</p>
+                                    <p>Try restarting the service and check your system resources:</p>
+                                    <pre class="bg-orange-100 p-2 mt-2 rounded text-sm">sudo systemctl restart gensynai
+htop</pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-orange-50 border-l-4 border-orange-400 p-5 rounded">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-orange-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-lg font-medium text-orange-800">Validator Not Receiving Rewards</h3>
+                                <div class="mt-2 text-orange-700">
+                                    <p>If your validator is not receiving expected rewards:</p>
+                                    <pre class="bg-orange-100 p-2 mt-2 rounded text-sm">Warning: No rewards received in the last 24 hours</pre>
+                                    <p class="mt-2 font-medium">Solution:</p>
+                                    <p>Check if your validator is properly staked and active:</p>
+                                    <pre class="bg-orange-100 p-2 mt-2 rounded text-sm">curl -X GET http://localhost:8545/api/v1/validator/status</pre>
+                                    <p class="mt-2">Ensure your wallet address is correctly configured in the config file.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold mb-4">Need More Help?</h3>
+                    <p class="mb-4">If you're still experiencing issues, please check out these resources:</p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li><a href="#" class="text-blue-600 hover:underline">GenSynAI Testnet Documentation</a></li>
+                        <li><a href="#" class="text-blue-600 hover:underline">GitHub Issues</a></li>
+                        <li><a href="#" class="text-blue-600 hover:underline">Discord Community</a></li>
+                        <li><a href="#" class="text-blue-600 hover:underline">Testnet Explorer</a></li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-8 mt-12">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <h2 class="text-2xl font-bold">GenSynAI</h2>
+                        <p class="text-gray-400 mt-1">Decentralized AI Network</p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-6 pt-6 text-center md:text-left text-gray-400 text-sm">
+                    &copy; 2023 GenSynAI. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+                
+                // Deactivate all tabs
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Activate selected tab
+                button.classList.add('active');
+                document.getElementById(`${tabName}-content`).classList.add('active');
+            });
+        });
+        
+        // Copy command functionality
+        const copyButtons = document.querySelectorAll('.command-copy');
+        
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const command = button.getAttribute('data-command');
+                navigator.clipboard.writeText(command);
+                
+                // Show success message
+                const successElement = button.nextElementSibling;
+                successElement.style.display = 'block';
+                
+                // Hide after 2 seconds
+                setTimeout(() => {
+                    successElement.style.display = 'none';
+                }, 2000);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93e22c778360a8c1',t:'MTc0Njk3MTcyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
