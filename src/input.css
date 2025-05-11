@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-blue-900 to-black text-blue-100 font-roboto;
+  }
+}
+
+@layer components {
+  .gradient-card {
+    @apply bg-gradient-to-br from-blue-900/40 to-black/70 backdrop-blur-xl border border-blue-400/30;
+  }
+  
+  .nav-link {
+    @apply relative transition-all duration-300;
+  }
+  
+  .nav-link::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .nav-link.active {
+    @apply text-blue-400;
+  }
+} 
