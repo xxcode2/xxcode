@@ -1,79 +1,88 @@
-// Navigation
+// Fungsi untuk menampilkan section
 function showSection(sectionId) {
-    // Hide all sections
+    // Sembunyikan semua section
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
     });
     
-    // Show selected section
-    document.getElementById(sectionId).classList.add('active');
+    // Tampilkan section yang dipilih
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.classList.add('active');
+    }
     
-    // Update active nav link
+    // Update active state pada nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('onclick').includes(sectionId)) {
+        if (link.getAttribute('onclick')?.includes(sectionId)) {
             link.classList.add('active');
         }
     });
 }
 
-// Service Tabs
+// Fungsi untuk menampilkan service tab
 function showServiceTab(tabId) {
-    // Hide all service content
-    document.querySelectorAll('.service-content').forEach(content => {
-        content.classList.add('hidden');
-        content.classList.remove('active');
-    });
-    
-    // Show selected service content
-    document.getElementById(tabId).classList.remove('hidden');
-    document.getElementById(tabId).classList.add('active');
-    
-    // Update active tab
+    // Update active state pada tabs
     document.querySelectorAll('.service-tab').forEach(tab => {
         tab.classList.remove('active');
-        if (tab.id === tabId + 'Tab') {
-            tab.classList.add('active');
-        }
     });
+    document.getElementById(tabId).classList.add('active');
+    
+    // Update content visibility
+    document.querySelectorAll('.service-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(tabId + '-content').classList.add('active');
 }
 
-// Form submission (demo)
+// Event listener saat DOM loaded
 document.addEventListener('DOMContentLoaded', function() {
-    const formButton = document.querySelector('form button');
-    if (formButton) {
-        formButton.addEventListener('click', function() {
-            alert('This is a demo form. In a real implementation, this would send your message.');
-        });
-    }
-    
-    // Tampilkan section home secara default
+    // Inisialisasi home section
     showSection('home');
     
-    // Tambahkan event listener untuk smooth scrolling
+    // Tambahkan smooth scroll untuk anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetId = this.getAttribute('href').substring(1);
+            showSection(targetId);
         });
     });
     
     // Parallax effect untuk crypto background
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
-        const grid = document.querySelector('.crypto-grid');
-        const bg = document.querySelector('.crypto-bg');
-        
-        if (grid && bg) {
-            grid.style.transform = `translateY(${scrolled * 0.5}px)`;
-            bg.style.transform = `translateY(${scrolled * 0.2}px)`;
-        }
+        const parallaxElements = document.querySelectorAll('.parallax');
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
     });
     
-    // Tambahkan animasi floating ke crypto symbols
-    document.querySelectorAll('.crypto-symbol').forEach((symbol, index) => {
-        symbol.style.animationDelay = `${index * 2}s`;
+    // Animasi untuk crypto symbols
+    const cryptoSymbols = document.querySelectorAll('.crypto-symbol');
+    cryptoSymbols.forEach((symbol, index) => {
+        symbol.style.animationDelay = `${index * 0.2}s`;
     });
+    
+    // Handle form submission
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Tambahkan logika form submission di sini
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    }
+    
+    // Handle mobile menu
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
 }); 
