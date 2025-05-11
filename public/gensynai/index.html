@@ -159,6 +159,78 @@
             border-color: rgba(74, 222, 128, 0.4);
             box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
         }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 250px;
+            background: linear-gradient(to bottom, #0F3460, #16213E);
+            padding: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 50;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+            display: block;
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 0;
+            color: white;
+            font-size: 1.1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu a:hover {
+            color: #4ade80;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .code-block {
+                font-size: 0.9rem;
+            }
+            
+            .step-number {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -167,6 +239,28 @@
         <div class="blur-circle"></div>
         <div class="blur-circle"></div>
         <div class="blur-circle"></div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="close-menu" id="closeMenu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </div>
+        <div class="flex items-center mb-8">
+            <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
+                <img src="/images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+            </div>
+            <span class="text-xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</span>
+        </div>
+        <a href="/#home" class="hover:text-blue-400 transition-colors">Home</a>
+        <a href="/#services" class="hover:text-blue-400 transition-colors">Services</a>
+        <a href="/#about" class="hover:text-blue-400 transition-colors">About</a>
+        <a href="/#contact" class="hover:text-blue-400 transition-colors">Contact</a>
     </div>
 
     <!-- Navbar -->
@@ -186,7 +280,7 @@
                     <a href="/#contact" class="hover:text-blue-400 transition-colors">Contact</a>
                 </div>
                 <div class="md:hidden">
-                    <button class="text-white focus:outline-none">
+                    <button class="text-white focus:outline-none" id="openMenu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -1034,6 +1128,34 @@ htop</pre>
                 }, 2000);
             });
         });
+
+        // Mobile Menu Functionality
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const openMenuButton = document.getElementById('openMenu');
+        const closeMenuButton = document.getElementById('closeMenu');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        openMenuButton.addEventListener('click', openMenu);
+        closeMenuButton.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+
+        // Close menu when clicking a link
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93e22c778360a8c1',t:'MTc0Njk3MTcyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
