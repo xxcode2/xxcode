@@ -12,16 +12,13 @@
   ],
   "routes": [
     {
-      "src": "/planq",
-      "dest": "/planq/index.html"
+      "src": "/(.*)/$",
+      "dest": "/$1/index.html"
     },
     {
-      "src": "/planq/",
-      "dest": "/planq/index.html"
-    },
-    {
-      "src": "^/(?!.*\\.[^/]+$)(.*)",
-      "dest": "/$1.html"
+      "src": "/(.*)",
+      "dest": "/$1.html",
+      "continue": true
     },
     {
       "src": "/(.*)",
