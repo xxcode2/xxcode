@@ -160,19 +160,86 @@
             box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
         }
 
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: linear-gradient(to right, #0F3460, #16213E);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .navbar-logo img {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .navbar-logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .navbar-links a {
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: #4ade80;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
         /* Mobile Menu Styles */
         .mobile-menu {
             display: none;
             position: fixed;
             top: 0;
+            left: 0;
             right: 0;
             bottom: 0;
-            width: 100%;
             background: linear-gradient(to bottom, #0F3460, #16213E);
-            padding: 2rem;
-            z-index: 50;
+            z-index: 1000;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            touch-action: none;
         }
 
         .mobile-menu.active {
@@ -187,54 +254,92 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 40;
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 999;
         }
 
         .mobile-menu-overlay.active {
             display: block;
         }
 
-        .mobile-menu a {
-            display: block;
-            padding: 1rem 0;
-            color: white;
-            font-size: 1.1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
+        .mobile-menu-content {
+            padding: 5rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .mobile-menu a:hover {
+        .mobile-menu-logo {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-menu-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .mobile-menu-links {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-menu-links a {
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 500;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover {
             color: #4ade80;
         }
 
         .close-menu {
-            position: absolute;
+            position: fixed;
             top: 1rem;
             right: 1rem;
             color: white;
             cursor: pointer;
-            z-index: 51;
+            z-index: 1001;
+            background: none;
+            border: none;
+            padding: 0.5rem;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            .code-block {
-                font-size: 0.9rem;
-            }
-            
-            .step-number {
-                width: 24px;
-                height: 24px;
-                font-size: 12px;
+            .navbar-links {
+                display: none;
             }
 
-            .mobile-menu {
-                padding-top: 4rem;
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-container {
+                padding: 0.75rem 1rem;
+            }
+
+            .navbar-logo img {
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .navbar-logo span {
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -252,51 +357,45 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <div class="close-menu" id="closeMenu">
+        <button class="close-menu" id="closeMenu">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
-        </div>
-        <div class="flex flex-col items-center mb-8">
-            <div class="w-16 h-16 rounded-full overflow-hidden mb-4">
-                <img src="/images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
+        </button>
+        <div class="mobile-menu-content">
+            <img src="/images/logos/xxcode.png" alt="xxcode Logo" class="mobile-menu-logo">
+            <span class="mobile-menu-title">xxcode</span>
+            <div class="mobile-menu-links">
+                <a href="/#home">Home</a>
+                <a href="/#services">Services</a>
+                <a href="/#about">About</a>
+                <a href="/#contact">Contact</a>
             </div>
-            <span class="text-2xl font-bold mb-8" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</span>
-            <a href="/#home" class="w-full text-center py-4 hover:text-blue-400 transition-colors">Home</a>
-            <a href="/#services" class="w-full text-center py-4 hover:text-blue-400 transition-colors">Services</a>
-            <a href="/#about" class="w-full text-center py-4 hover:text-blue-400 transition-colors">About</a>
-            <a href="/#contact" class="w-full text-center py-4 hover:text-blue-400 transition-colors">Contact</a>
         </div>
     </div>
 
     <!-- Navbar -->
-    <nav class="relative z-10 bg-gradient-to-r from-blue-900 to-black text-white py-4">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full overflow-hidden mr-3">
-                        <img src="/images/logos/xxcode.png" alt="xxcode Logo" class="w-full h-full object-cover rounded-full">
-                    </div>
-                    <a href="/" class="text-xl font-bold" style="background: linear-gradient(to right, #4ade80, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">xxcode</a>
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="/#home" class="hover:text-blue-400 transition-colors">Home</a>
-                    <a href="/#services" class="hover:text-blue-400 transition-colors">Services</a>
-                    <a href="/#about" class="hover:text-blue-400 transition-colors">About</a>
-                    <a href="/#contact" class="hover:text-blue-400 transition-colors">Contact</a>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-white focus:outline-none" id="openMenu">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="/images/logos/xxcode.png" alt="xxcode Logo">
+                <span>xxcode</span>
             </div>
+            <div class="navbar-links">
+                <a href="/#home">Home</a>
+                <a href="/#services">Services</a>
+                <a href="/#about">About</a>
+                <a href="/#contact">Contact</a>
+            </div>
+            <button class="navbar-toggle" id="openMenu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
     </nav>
 
-    <div class="min-h-screen relative z-10">
+    <div class="min-h-screen relative z-10 pt-16">
         <!-- Header -->
         <header class="bg-gradient-to-r from-[#4ade80] to-[#facc15] text-white py-16">
             <div class="container mx-auto px-4 md:px-8">
