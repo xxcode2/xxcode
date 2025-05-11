@@ -6,23 +6,21 @@ const port = 3000;
 // Serve static files from the public directory
 app.use(express.static('public'));
 
-// Handle specific routes
-app.get('/planq', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'planq', 'index.html'));
+// Handle directory requests (ending with /)
+app.get('*/$', (req, res, next) => {
+    const dirPath = req.path.slice(0, -1); // Remove trailing slash
+    const indexPath = path.join(__dirname, 'public', dirPath, 'index.html');
+    res.sendFile(indexPath, (err) => {
+        if (err) next();
+    });
 });
 
-app.get('/planq/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'planq', 'index.html'));
-});
-
-// Handle routes without .html extension
+// Handle requests without file extension
 app.get('*', (req, res, next) => {
     if (!req.path.includes('.')) {
         const filePath = path.join(__dirname, 'public', req.path + '.html');
         res.sendFile(filePath, (err) => {
-            if (err) {
-                next();
-            }
+            if (err) next();
         });
     } else {
         next();
