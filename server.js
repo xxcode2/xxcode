@@ -6,6 +6,15 @@ const port = 3000;
 // Serve static files from the public directory
 app.use(express.static('public'));
 
+// Handle specific routes
+app.get('/planq', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'planq', 'index.html'));
+});
+
+app.get('/planq/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'planq', 'index.html'));
+});
+
 // Handle routes without .html extension
 app.get('*', (req, res, next) => {
     if (!req.path.includes('.')) {
