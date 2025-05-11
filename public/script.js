@@ -1,14 +1,19 @@
-// Navigation
+// Fungsi untuk menampilkan section
 function showSection(sectionId) {
-    // Hide all sections
+    // Sembunyikan semua section
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
+        section.style.display = 'none';
     });
     
-    // Show selected section
-    document.getElementById(sectionId).classList.add('active');
+    // Tampilkan section yang dipilih
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+        selectedSection.classList.add('active');
+        selectedSection.style.display = 'block';
+    }
     
-    // Update active nav link
+    // Update active state pada nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('onclick').includes(sectionId)) {
@@ -17,36 +22,29 @@ function showSection(sectionId) {
     });
 }
 
-// Service Tabs
+// Fungsi untuk menampilkan service tab
 function showServiceTab(tabId) {
-    // Hide all service content
-    document.querySelectorAll('.service-content').forEach(content => {
-        content.classList.add('hidden');
-        content.classList.remove('active');
-    });
-    
-    // Show selected service content
-    document.getElementById(tabId).classList.remove('hidden');
-    document.getElementById(tabId).classList.add('active');
-    
-    // Update active tab
+    // Update active state pada service tabs
     document.querySelectorAll('.service-tab').forEach(tab => {
         tab.classList.remove('active');
         if (tab.id === tabId + 'Tab') {
             tab.classList.add('active');
         }
     });
+    
+    // Tampilkan konten yang sesuai
+    document.querySelectorAll('.service-content').forEach(content => {
+        content.classList.remove('active');
+        content.style.display = 'none';
+        if (content.id === tabId) {
+            content.classList.add('active');
+            content.style.display = 'block';
+        }
+    });
 }
 
-// Form submission (demo)
+// Inisialisasi saat dokumen dimuat
 document.addEventListener('DOMContentLoaded', function() {
-    const formButton = document.querySelector('form button');
-    if (formButton) {
-        formButton.addEventListener('click', function() {
-            alert('This is a demo form. In a real implementation, this would send your message.');
-        });
-    }
-    
     // Tampilkan section home secara default
     showSection('home');
     
@@ -54,9 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const targetId = this.getAttribute('href').substring(1);
+            showSection(targetId);
         });
     });
     
@@ -76,4 +73,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.crypto-symbol').forEach((symbol, index) => {
         symbol.style.animationDelay = `${index * 2}s`;
     });
+
+    // Tambahkan event listener untuk form submission
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('This is a demo form. In a real implementation, this would send your message.');
+        });
+    }
 }); 
