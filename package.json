@@ -1,19 +1,12 @@
 {
   "name": "xxcode",
   "version": "1.0.0",
-  "description": "xxcode Portfolio Website",
-  "main": "script.js",
+  "description": "xxcode website",
   "scripts": {
-    "dev": "tailwindcss -i ./input.css -o ./public/styles.css --watch",
-    "build": "mkdir -p public/images/logos && tailwindcss -i ./input.css -o ./public/styles.css --minify && cp index.html public/ && cp script.js public/ && cp -r images/logos/* public/images/logos/ 2>/dev/null || true",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tailwindcss -i ./src/input.css -o ./public/styles.css --minify",
+    "watch": "tailwindcss -i ./src/input.css -o ./public/styles.css --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.31",
     "tailwindcss": "^3.3.0"
   }
 }
