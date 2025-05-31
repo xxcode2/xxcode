@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "xxcode website",
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./public/styles.css --minify",
-    "watch": "tailwindcss -i ./src/input.css -o ./public/styles.css --watch"
+    "build": "npx tailwindcss -i ./src/input.css -o ./public/styles.css --minify",
+    "watch": "npx tailwindcss -i ./src/input.css -o ./public/styles.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
