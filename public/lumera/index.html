@@ -365,22 +365,22 @@
     <div class="guide-container">
         <div class="guide-section">
             <h2>Lumera Validator Guide</h2>
-            <p>Panduan lengkap untuk mengatur dan menjalankan validator node Lumera.</p>
+            <p>Complete guide for setting up and running a Lumera validator node.</p>
         </div>
 
         <div class="guide-section">
-            <h3>Persyaratan Sistem</h3>
+            <h3>System Requirements</h3>
             <ul>
                 <li>CPU: 4+ cores</li>
                 <li>RAM: 8GB+</li>
                 <li>Storage: 100GB+ SSD</li>
-                <li>OS: Ubuntu 20.04 atau lebih baru</li>
-                <li>Koneksi Internet: Stabil dengan bandwidth minimal 100Mbps</li>
+                <li>OS: Ubuntu 20.04 or newer</li>
+                <li>Internet Connection: Stable with minimum 100Mbps bandwidth</li>
             </ul>
         </div>
 
         <div class="guide-section">
-            <h3>1. Persiapkan Sistem</h3>
+            <h3>1. Prepare System</h3>
             <div class="code-block">
                 <pre>sudo apt update && sudo apt upgrade -y
 sudo apt install -y build-essential git curl wget</pre>
@@ -419,7 +419,7 @@ cd lumera-networks</pre>
                 <pre>./build/lumerad init [MONIKER] --chain-id lumera-1</pre>
             </div>
             <div class="note">
-                Ganti [MONIKER] dengan nama validator Anda.
+                Replace [MONIKER] with your validator name.
             </div>
         </div>
 
@@ -437,7 +437,7 @@ cd lumera-networks</pre>
 sed -i 's/persistent_peers = ""/persistent_peers = "YOUR_PERSISTENT_PEERS"/' ~/.lumerad/config/config.toml</pre>
             </div>
             <div class="note">
-                Ganti YOUR_SEED_NODES dan YOUR_PERSISTENT_PEERS dengan alamat node yang sesuai.
+                Replace YOUR_SEED_NODES and YOUR_PERSISTENT_PEERS with appropriate node addresses.
             </div>
         </div>
 
@@ -447,7 +447,7 @@ sed -i 's/persistent_peers = ""/persistent_peers = "YOUR_PERSISTENT_PEERS"/' ~/.
                 <pre>./build/lumerad keys add [WALLET_NAME]</pre>
             </div>
             <div class="warning">
-                Simpan mnemonic phrase dan private key di tempat yang aman!
+                Save mnemonic phrase and private key in a secure location!
             </div>
         </div>
 
@@ -479,7 +479,7 @@ sed -i 's/persistent_peers = ""/persistent_peers = "YOUR_PERSISTENT_PEERS"/' ~/.
 
         <div class="guide-section">
             <h3>Monitoring</h3>
-            <p>Untuk memonitor status validator Anda, gunakan perintah berikut:</p>
+            <p>To monitor your validator status, use the following commands:</p>
             <div class="code-block">
                 <pre>./build/lumerad status
 ./build/lumerad query staking validator $(./build/lumerad keys show [WALLET_NAME] --bech val -a)</pre>
@@ -487,8 +487,8 @@ sed -i 's/persistent_peers = ""/persistent_peers = "YOUR_PERSISTENT_PEERS"/' ~/.
         </div>
 
         <div class="guide-section">
-            <h3>Dukungan</h3>
-            <p>Untuk bantuan lebih lanjut, silakan kunjungi:</p>
+            <h3>Support</h3>
+            <p>For further assistance, please visit:</p>
             <ul>
                 <li><a href="https://github.com/LumeraProtocol/lumera-networks" target="_blank" class="text-blue-400 hover:text-blue-300">GitHub Repository</a></li>
                 <li><a href="https://discord.gg/lumera" target="_blank" class="text-blue-400 hover:text-blue-300">Discord Community</a></li>
