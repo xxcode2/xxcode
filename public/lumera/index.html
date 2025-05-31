@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumera Validator Guide - xxcode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f0f0f;
+            color: #e2e8f0;
+        }
+        
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .xxcode-logo {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background-color: #1a1a1a;
+            border-radius: 0.5rem;
+            position: relative;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .code-block pre {
+            overflow-x: auto;
+            padding: 0.5rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .copy-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            transition: all 0.2s;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .copy-button:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .copy-notification {
+            position: absolute;
+            top: 0.75rem;
+            right: 3rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #4ade80, #facc15);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4ade80, #facc15);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+
+        .xxcode-gradient {
+            background: linear-gradient(135deg, #4ade80, #facc15);
+        }
+
+        .xxcode-text-gradient {
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .xxcode-border-gradient {
+            border: 1px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(to right, #4ade80, #facc15);
+        }
+
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(250, 204, 21, 0.1));
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s;
+        }
+
+        .gradient-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(74, 222, 128, 0.2);
+        }
+
+        #mobileMenu {
+            background-color: rgba(0, 0, 0, 0.95);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+
+        /* Navigation Styles */
+        .nav-container {
+            background: rgba(16, 16, 32, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+        }
+
+        .nav-logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 243, 255, 0.1);
+            color: #00f3ff;
+        }
+
+        .nav-link.active {
+            color: #00f3ff;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Adjust main content to account for fixed header */
+        .guide-container {
+            margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2rem;
+        }
+
+        .guide-section {
+            background: rgba(16, 16, 32, 0.8);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .guide-section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 243, 255, 0.15);
+            border-color: rgba(0, 243, 255, 0.3);
+        }
+
+        .guide-section h2 {
+            color: #00f3ff;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+
+        .guide-section h3 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to right, #4ade80, #facc15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .guide-section p {
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .guide-section ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .guide-section ul li {
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .guide-section ul li:before {
+            content: "•";
+            color: #00f3ff;
+            position: absolute;
+            left: 0;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: #00f3ff;
+            font-family: 'Roboto Mono', monospace;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+        }
+
+        .note {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.25rem;
+            color: #ffc107;
+        }
+
+        .warning {
+            background: rgba(255, 87, 34, 0.1);
+            border-left: 4px solid #ff5722;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.25rem;
+            color: #ff5722;
+        }
+
+        .guide-section a {
+            color: #00f3ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .guide-section a:hover {
+            color: #4ade80;
+            border-bottom-color: #4ade80;
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="/" class="nav-logo">
+                <img src="../images/logos/xxcode.png" alt="xxcode Logo">
+                <h1>xxcode</h1>
+            </a>
+            <div class="nav-links">
+                <a href="javascript:void(0)" onclick="window.location.href='/'" class="nav-link">Home</a>
+                <a href="javascript:void(0)" onclick="window.location.href='/#services'" class="nav-link">Services</a>
+                <a href="javascript:void(0)" onclick="window.location.href='/#about'" class="nav-link">About</a>
+                <a href="javascript:void(0)" onclick="window.location.href='/#contact'" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="guide-container">
+        <div class="guide-section">
+            <h2>Lumera Validator Guide</h2>
+            <p>Panduan lengkap untuk mengatur dan menjalankan validator node Lumera.</p>
+        </div>
+
+        <div class="guide-section">
+            <h3>Persyaratan Sistem</h3>
+            <ul>
+                <li>CPU: 4+ cores</li>
+                <li>RAM: 8GB+</li>
+                <li>Storage: 100GB+ SSD</li>
+                <li>OS: Ubuntu 20.04 atau lebih baru</li>
+                <li>Koneksi Internet: Stabil dengan bandwidth minimal 100Mbps</li>
+            </ul>
+        </div>
+
+        <div class="guide-section">
+            <h3>1. Persiapkan Sistem</h3>
+            <div class="code-block">
+                <pre>sudo apt update && sudo apt upgrade -y
+sudo apt install -y build-essential git curl wget</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>2. Install Go</h3>
+            <div class="code-block">
+                <pre>wget https://go.dev/dl/go1.20.5.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.20.5.linux-amd64.tar.gz
+echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
+source ~/.bashrc</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>3. Clone Repository</h3>
+            <div class="code-block">
+                <pre>git clone https://github.com/LumeraProtocol/lumera-networks.git
+cd lumera-networks</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>4. Build Binary</h3>
+            <div class="code-block">
+                <pre>make build</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>5. Inisialisasi Node</h3>
+            <div class="code-block">
+                <pre>./build/lumerad init [MONIKER] --chain-id lumera-1</pre>
+            </div>
+            <div class="note">
+                Ganti [MONIKER] dengan nama validator Anda.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>6. Konfigurasi Genesis</h3>
+            <div class="code-block">
+                <pre>curl -s https://raw.githubusercontent.com/LumeraProtocol/lumera-networks/master/genesis.json > ~/.lumerad/config/genesis.json</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>7. Konfigurasi Node</h3>
+            <div class="code-block">
+                <pre>sed -i 's/seeds = ""/seeds = "YOUR_SEED_NODES"/' ~/.lumerad/config/config.toml
+sed -i 's/persistent_peers = ""/persistent_peers = "YOUR_PERSISTENT_PEERS"/' ~/.lumerad/config/config.toml</pre>
+            </div>
+            <div class="note">
+                Ganti YOUR_SEED_NODES dan YOUR_PERSISTENT_PEERS dengan alamat node yang sesuai.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>8. Buat Wallet</h3>
+            <div class="code-block">
+                <pre>./build/lumerad keys add [WALLET_NAME]</pre>
+            </div>
+            <div class="warning">
+                Simpan mnemonic phrase dan private key di tempat yang aman!
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>9. Jalankan Node</h3>
+            <div class="code-block">
+                <pre>./build/lumerad start</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>10. Buat Validator</h3>
+            <div class="code-block">
+                <pre>./build/lumerad tx staking create-validator \
+  --amount=1000000ulumera \
+  --pubkey=$(./build/lumerad tendermint show-validator) \
+  --moniker="[MONIKER]" \
+  --chain-id=lumera-1 \
+  --commission-rate="0.10" \
+  --commission-max-rate="0.20" \
+  --commission-max-change-rate="0.01" \
+  --min-self-delegation="1" \
+  --gas="auto" \
+  --gas-adjustment=1.5 \
+  --gas-prices="0.025ulumera" \
+  --from=[WALLET_NAME]</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>Monitoring</h3>
+            <p>Untuk memonitor status validator Anda, gunakan perintah berikut:</p>
+            <div class="code-block">
+                <pre>./build/lumerad status
+./build/lumerad query staking validator $(./build/lumerad keys show [WALLET_NAME] --bech val -a)</pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h3>Dukungan</h3>
+            <p>Untuk bantuan lebih lanjut, silakan kunjungi:</p>
+            <ul>
+                <li><a href="https://github.com/LumeraProtocol/lumera-networks" target="_blank" class="text-blue-400 hover:text-blue-300">GitHub Repository</a></li>
+                <li><a href="https://discord.gg/lumera" target="_blank" class="text-blue-400 hover:text-blue-300">Discord Community</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Add active class to current page link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
