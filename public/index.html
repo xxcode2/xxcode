@@ -451,63 +451,77 @@
             <!-- Mainnet Projects -->
             <div id="mainnet" class="service-content active">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Project 1 -->
-                    <div class="project-card gradient-card rounded-xl p-6 flex flex-col items-center">
-                        <a href="/planq/index.html" class="w-full h-full flex flex-col items-center">
-                            <div class="w-20 h-20 mb-4 flex items-center justify-center project-logo">
-                                <svg viewBox="0 0 100 100" class="w-full h-full">
-                                    <circle cx="50" cy="50" r="45" fill="#1A1A2E" />
-                                    <path d="M30,35 L70,35 L70,65 L30,65 Z" fill="#4361EE" />
-                                    <path d="M40,45 L60,45 L60,55 L40,55 Z" fill="#1A1A2E" />
-                                    <circle cx="35" cy="40" r="3" fill="#4CC9F0" />
-                                    <circle cx="65" cy="40" r="3" fill="#4CC9F0" />
-                                    <circle cx="35" cy="60" r="3" fill="#4CC9F0" />
-                                    <circle cx="65" cy="60" r="3" fill="#4CC9F0" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Planq</h3>
-                            <p class="text-blue-100 text-center mb-4">EVM compatible chain built using the Cosmos SDK</p>
-                            <div class="mt-auto">
-                                <span class="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm">Active Validator</span>
-                            </div>
-                        </a>
+                    <!-- Project 1 - Planq -->
+                    <div class="project-card gradient-card rounded-xl p-6 flex flex-col items-center" onclick="window.location.href='planq/index.html'" style="cursor: pointer;">
+                        <div class="w-20 h-20 mb-4 flex items-center justify-center project-logo">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <circle cx="50" cy="50" r="45" fill="#1A1A2E" />
+                                <path d="M30,35 L70,35 L70,65 L30,65 Z" fill="#4361EE" />
+                                <path d="M40,45 L60,45 L60,55 L40,55 Z" fill="#1A1A2E" />
+                                <circle cx="35" cy="40" r="3" fill="#4CC9F0" />
+                                <circle cx="65" cy="40" r="3" fill="#4CC9F0" />
+                                <circle cx="35" cy="60" r="3" fill="#4CC9F0" />
+                                <circle cx="65" cy="60" r="3" fill="#4CC9F0" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Planq</h3>
+                        <p class="text-blue-100 text-center mb-4">EVM compatible chain built using the Cosmos SDK</p>
+                        <div class="mt-auto">
+                            <span class="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm">Active Validator</span>
+                        </div>
                     </div>
                     
-                    <!-- Project 2 -->
-                    <div class="project-card gradient-card rounded-xl p-6 flex flex-col items-center">
-                        <a href="symphony/index.html" class="w-full h-full flex flex-col items-center">
-                            <div class="w-20 h-20 mb-4 flex items-center justify-center project-logo">
-                                <svg viewBox="0 0 100 100" class="w-full h-full">
-                                    <circle cx="50" cy="50" r="45" fill="#16213E" />
-                                    <path d="M50,20 L80,40 L80,70 L50,90 L20,70 L20,40 Z" fill="#0F3460" stroke="#E94560" stroke-width="2" />
-                                    <circle cx="50" cy="50" r="15" fill="#E94560" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2 text-white">Symphony</h3>
-                            <p class="text-blue-100 text-center mb-4">High-performance blockchain network for cross-chain communication</p>
-                            <div class="mt-auto">
-                                <span class="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm">Active Validator</span>
-                            </div>
-                        </a>
+                    <!-- Project 2 - Symphony -->
+                    <div class="project-card gradient-card rounded-xl p-6 flex flex-col items-center" onclick="window.location.href='symphony/index.html'" style="cursor: pointer;">
+                        <div class="w-20 h-20 mb-4 flex items-center justify-center project-logo">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <circle cx="50" cy="50" r="45" fill="#16213E" />
+                                <path d="M50,20 L80,40 L80,70 L50,90 L20,70 L20,40 Z" fill="#0F3460" stroke="#E94560" stroke-width="2" />
+                                <circle cx="50" cy="50" r="15" fill="#E94560" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Symphony</h3>
+                        <p class="text-blue-100 text-center mb-4">High-performance blockchain network for cross-chain communication</p>
+                        <div class="mt-auto">
+                            <span class="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm">Active Validator</span>
+                        </div>
                     </div>
                     
-                    <!-- Project 3 -->
-                    <div class="project-card gradient-card rounded-xl p-6 flex flex-col items-center">
-                        <a href="/gensynai/index.html" class="w-full h-full flex flex-col items-center">
-                            <div class="w-20 h-20 mb-4 flex items-center justify-center project-logo">
-                                <svg viewBox="0 0 100 100" class="w-full h-full">
-                                    <circle cx="50" cy="50" r="45" fill="#0A192F" />
-                                    <path d="M30,30 L70,30 L70,70 L30,70 Z" fill="#3A506B" stroke="#5BC0BE" stroke-width="2" />
-                                    <circle cx="50" cy="50" r="10" fill="#5BC0BE" />
-                                    <path d="M50,30 L50,20 M70,50 L80,50 M50,70 L50,80 M30,50 L20,50" stroke="#5BC0BE" stroke-width="3" />
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2 text-white">GensynAI</h3>
-                            <p class="text-blue-100 text-center mb-4">Decentralized AI computing network</p>
-                            <div class="mt-auto">
-                                <span class="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm">Active Validator</span>
-                            </div>
-                        </a>
+                    <!-- Project 3 - GensynAI -->
+                    <div class="project-card gradient-card rounded-xl p-6 flex flex-col items-center" onclick="window.location.href='gensynai/index.html'" style="cursor: pointer;">
+                        <div class="w-20 h-20 mb-4 flex items-center justify-center project-logo">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <circle cx="50" cy="50" r="45" fill="#0A192F" />
+                                <path d="M30,30 L70,30 L70,70 L30,70 Z" fill="#3A506B" stroke="#5BC0BE" stroke-width="2" />
+                                <circle cx="50" cy="50" r="10" fill="#5BC0BE" />
+                                <path d="M50,30 L50,20 M70,50 L80,50 M50,70 L50,80 M30,50 L20,50" stroke="#5BC0BE" stroke-width="3" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">GensynAI</h3>
+                        <p class="text-blue-100 text-center mb-4">Decentralized AI computing network</p>
+                        <div class="mt-auto">
+                            <span class="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm">Active Validator</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 - Lumera -->
+                    <div class="project-card gradient-card rounded-xl p-6 flex flex-col items-center" onclick="window.location.href='lumera/index.html'" style="cursor: pointer;">
+                        <div class="w-20 h-20 mb-4 flex items-center justify-center project-logo">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <circle cx="50" cy="50" r="45" fill="#1A1A2E" />
+                                <path d="M30,35 L70,35 L70,65 L30,65 Z" fill="#4361EE" />
+                                <path d="M40,45 L60,45 L60,55 L40,55 Z" fill="#1A1A2E" />
+                                <circle cx="35" cy="40" r="3" fill="#4CC9F0" />
+                                <circle cx="65" cy="40" r="3" fill="#4CC9F0" />
+                                <circle cx="35" cy="60" r="3" fill="#4CC9F0" />
+                                <circle cx="65" cy="60" r="3" fill="#4CC9F0" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-white">Lumera</h3>
+                        <p class="text-blue-100 text-center mb-4">High-performance blockchain network for cross-chain communication</p>
+                        <div class="mt-auto">
+                            <span class="px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm">Active Validator</span>
+                        </div>
                     </div>
                 </div>
             </div>
