@@ -5,15 +5,14 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "public",
-        "buildCommand": "npm run build"
+        "distDir": "public"
       }
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/$1"
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ],
   "headers": [
