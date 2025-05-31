@@ -1,17 +1,17 @@
-// Fungsi untuk menampilkan section
+// Function to show section
 function showSection(sectionId) {
-    // Sembunyikan semua section
+    // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
         section.classList.remove('active');
     });
     
-    // Tampilkan section yang dipilih
+    // Show selected section
     const selectedSection = document.getElementById(sectionId);
     if (selectedSection) {
         selectedSection.classList.add('active');
     }
     
-    // Update active state pada nav links
+    // Update active state on nav links
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('onclick')?.includes(sectionId)) {
@@ -20,9 +20,9 @@ function showSection(sectionId) {
     });
 }
 
-// Fungsi untuk menampilkan service tab
+// Function to show service tab
 function showServiceTab(tabId) {
-    // Update active state pada tabs
+    // Update active state on tabs
     document.querySelectorAll('.service-tab').forEach(tab => {
         tab.classList.remove('active');
     });
@@ -35,12 +35,12 @@ function showServiceTab(tabId) {
     document.getElementById(tabId + '-content').classList.add('active');
 }
 
-// Event listener saat DOM loaded
+// Event listener when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Inisialisasi home section
+    // Initialize home section
     showSection('home');
     
-    // Tambahkan smooth scroll untuk anchor links
+    // Add smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Parallax effect untuk crypto background
+    // Parallax effect for crypto background
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
         const parallaxElements = document.querySelectorAll('.parallax');
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Animasi untuk crypto symbols
+    // Animation for crypto symbols
     const cryptoSymbols = document.querySelectorAll('.crypto-symbol');
     cryptoSymbols.forEach((symbol, index) => {
         symbol.style.animationDelay = `${index * 0.2}s`;
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            // Tambahkan logika form submission di sini
+            // Add form submission logic here
             alert('Thank you for your message! We will get back to you soon.');
             this.reset();
         });
